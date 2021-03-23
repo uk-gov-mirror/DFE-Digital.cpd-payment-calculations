@@ -3,7 +3,7 @@ Draft payment calculations engine
 
 ## About
 
-This engine perfoms all payment calculations for both ECFs (Early Careers Framework) and NPQs (National Professional Qualification) so that training providers can be paid the correct amount.
+This engine performs all payment calculations for both [ECFs (Early Career Framework)](https://www.early-career-framework.education.gov.uk/) and [the reformed NPQs (National Professional Qualification)](https://www.gov.uk/government/publications/national-professional-qualifications-frameworks-from-september-2021) so that training providers can be paid the correct amount.
 
 It [will be] publicly accessible code so the providers will be able to satisfy themselves that the numbers they receive match the rules defined herein.
 
