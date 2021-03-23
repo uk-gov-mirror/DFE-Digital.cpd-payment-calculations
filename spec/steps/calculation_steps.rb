@@ -4,11 +4,11 @@ step 'I run the calculation' do
   calculator_result = 42.25 # TODO: run the calculator
 end
 
-step 'The output should be :decimal' do |sum|
+step 'The output should be :decimal_placeholder' do |sum|
   expect(calculator_result).to eq(sum)
 end
 
 # Convert decimal strings to decimal values. Ref: https://github.com/jnicklas/turnip#custom-step-placeholders
-placeholder :decimal do
+placeholder :decimal_placeholder do
   match(/\d+\.?\d+/, &:to_d)
 end
