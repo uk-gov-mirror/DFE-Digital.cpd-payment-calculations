@@ -22,6 +22,7 @@ GEM
       middleware
       thor
       thread_safe
+    require_all (3.0.0)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -49,6 +50,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  require_all
   turnip
 
 BUNDLED WITH
