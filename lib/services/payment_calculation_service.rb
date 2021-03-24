@@ -1,5 +1,5 @@
 class PaymentCalculationService
   def self.calculate
-    42.25
+    BigDecimal(42.25, 10)
   end
 end
