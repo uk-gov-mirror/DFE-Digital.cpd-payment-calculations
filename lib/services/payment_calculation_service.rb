@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PaymentCalculationService
   def initialize(config)
     @config = config
@@ -10,11 +12,11 @@ class PaymentCalculationService
         per_participant_service_fee: per_participant_service_fee,
         total_service_fee: total_service_fee,
         monthly_service_fee: monthly_service_fee,
-      }
+      },
     }
   end
 
-  private
+private
 
   def per_participant_service_fee
     band_a * 0.4
