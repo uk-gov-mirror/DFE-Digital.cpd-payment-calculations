@@ -3,6 +3,18 @@ class PaymentCalculationService
     @config = config
   end
 
+  def calculate
+    {
+      output: {
+        per_participant_service_fee: per_participant_service_fee,
+        total_service_fee: total_service_fee,
+        monthly_service_fee: monthly_service_fee,
+      }
+    }
+  end
+
+  private
+
   def per_participant_service_fee
     band_a * 0.4
   end
@@ -16,7 +28,7 @@ class PaymentCalculationService
     (total_service_fee / number_of_monthly_payments).round(0)
   end
 
-  private
+  # config accessors
 
   def band_a
     BigDecimal(@config[:band_a], 10)

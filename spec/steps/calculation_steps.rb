@@ -28,19 +28,20 @@ module CalculationSteps
       band_c: @band_c,
       setup_cost: @setup_cost,
     }
-    @calculator = PaymentCalculationService.new(config)
+    calculator = PaymentCalculationService.new(config)
+    @result = calculator.calculate
   end
 
   step 'The per-participant service fee is £:decimal_placeholder' do |expected_value|
-    expect(@calculator.per_participant_service_fee).to eq(expected_value)
+    expect(@result[:output][:per_participant_service_fee]).to eq(expected_value)
   end
 
   step 'The total service fee is £:decimal_placeholder' do |expected_value|
-    expect(@calculator.total_service_fee).to eq(expected_value)
+    expect(@result[:output][:total_service_fee]).to eq(expected_value)
   end
 
   step 'The monthly service fee is £:decimal_placeholder' do |expected_value|
-    expect(@calculator.monthly_service_fee).to eq(expected_value)
+    expect(@result[:output][:monthly_service_fee]).to eq(expected_value)
   end
 end
 
