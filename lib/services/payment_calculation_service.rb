@@ -5,6 +5,7 @@ class PaymentCalculationService
 
   def calculate
     {
+      input: @config,
       output: {
         per_participant_service_fee: per_participant_service_fee,
         total_service_fee: total_service_fee,

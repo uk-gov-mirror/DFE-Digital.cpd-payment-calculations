@@ -10,4 +10,8 @@ describe PaymentCalculationService do
     expect(@result[:output][:total_service_fee]).to be_a(BigDecimal)
     expect(@result[:output][:monthly_service_fee]).to be_a(BigDecimal)
   end
+
+  it 'Includes config in the output' do
+    expect(@result[:input]).to eq(@config)
+  end
 end
