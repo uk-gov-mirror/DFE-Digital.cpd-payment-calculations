@@ -3,20 +3,20 @@ Feature: Calculate payments
   Scenario Outline: Calculation of service fees
     Given the recruitment target is <recruitment_target>
       # Band A cost from cell F20:
-    And Band A per-participant price is <band_a>
+      And Band A per-participant price is <band_a>
       # Band B cost from cell F21:
-    And Band B per-participant price is <band_b>
+      And Band B per-participant price is <band_b>
       # Band C cost from cell F21:
-    And Band C per-participant price is <band_c>
+      And Band C per-participant price is <band_c>
       # Setup cost from cell Y20:
-    And The set-up cost is <setup_cost>
+      And The set-up cost is <setup_cost>
     When I run the calculation
     # per-participant service fee from cell E60
     Then The per-participant service fee is <output_per_participant_fee>
       # total service fee from cell D60
-    And The total service fee is <output_total_fee>
+      And The total service fee is <output_total_fee>
       # monthly service fee from cell F60
-    And The monthly service fee is <output_monthly_fee>
+      And The monthly service fee is <output_monthly_fee>
     Examples:
       # These numbers are from the example "Call Off Pricing Schedule" .xlsm example files supplied to the team
       | recruitment_target | band_a | band_b | band_c | setup_cost | output_per_participant_fee | output_total_fee | output_monthly_fee |
