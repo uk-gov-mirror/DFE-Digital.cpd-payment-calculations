@@ -1,5 +1,6 @@
 Feature: Calculate payments
-  Scenario: Calculation of service fees
+
+  Scenario: Calculation of service fees example 1
     # These numbers are from the example "Call Off Pricing Schedule" .xlsm example files supplied to the team
     Given the recruitment target is 2000
       # Band A cost from cell F20:
@@ -17,3 +18,14 @@ Feature: Calculate payments
       And The total service fee is £796,000
       # monthly service fee from cell F60
       And The monthly service fee is £27,448
+
+  Scenario: Calculation of service fees example 2
+    Given the recruitment target is 2000
+    And Band A per-participant price is £1,350
+    And Band B per-participant price is £1,250
+    And Band C per-participant price is £1,150
+    And The set-up cost is £0.00
+    When I run the calculation
+    Then The per-participant service fee is £540
+    And The total service fee is £1,080,000
+    And The monthly service fee is £37,241
