@@ -1,6 +1,6 @@
-Feature: Calculate payments
+Feature: Calculate ECF payments
 
-  Scenario Outline: Calculation of service fees
+  Scenario Outline: Calculation of ECF service fees
     Given the recruitment target is <recruitment_target>
       # Band A cost from cell F20:
       And Band A per-participant price is <band_a>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module CalculationSteps
+module EcfCalculationSteps
   step "the recruitment target is :decimal_placeholder" do |value|
     @recruitment_target = value
   end
@@ -29,7 +29,7 @@ module CalculationSteps
       band_c: @band_c,
       setup_cost: @setup_cost,
     }
-    calculator = PaymentCalculationService.new(config)
+    calculator = EcfPaymentCalculationService.new(config)
     @result = calculator.calculate
   end
 
@@ -47,5 +47,5 @@ module CalculationSteps
 end
 
 RSpec.configure do |config|
-  config.include CalculationSteps
+  config.include EcfCalculationSteps
 end

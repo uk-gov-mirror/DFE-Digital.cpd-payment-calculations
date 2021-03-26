@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentCalculationService
+class EcfPaymentCalculationService
   def initialize(config)
     @config = config
   end
