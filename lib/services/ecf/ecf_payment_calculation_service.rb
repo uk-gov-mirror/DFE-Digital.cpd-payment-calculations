@@ -28,7 +28,7 @@ private
 
   def monthly_service_fee
     number_of_monthly_payments = 29
-    (total_service_fee / number_of_monthly_payments).round(0)
+    (total_service_fee / number_of_monthly_payments).round(0).to_d
   end
 
   # config accessors

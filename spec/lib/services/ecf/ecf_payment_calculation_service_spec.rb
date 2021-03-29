@@ -7,13 +7,13 @@ describe EcfPaymentCalculationService do
     @result = calculator.calculate
   end
 
-  it "Return BigDecimal for all money outputs" do
+  it "returns BigDecimal for all money outputs" do
     expect(@result[:output][:per_participant_service_fee]).to be_a(BigDecimal)
     expect(@result[:output][:total_service_fee]).to be_a(BigDecimal)
     expect(@result[:output][:monthly_service_fee]).to be_a(BigDecimal)
   end
 
-  it "Includes config in the output" do
+  it "includes config in the output" do
     expect(@result[:input]).to eq(@config)
   end
 end

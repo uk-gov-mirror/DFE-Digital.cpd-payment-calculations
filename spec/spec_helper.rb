@@ -18,6 +18,7 @@
 
 require "require_all"
 require_all "lib"
+require_all "spec/support"
 require "pry"
 
 RSpec.configure do |config|

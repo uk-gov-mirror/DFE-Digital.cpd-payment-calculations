@@ -8,6 +8,7 @@ end
 
 group :test do
   gem "require_all"
-  gem "rubocop-govuk"
   gem "turnip"
 end
+
+gem "rubocop-govuk"

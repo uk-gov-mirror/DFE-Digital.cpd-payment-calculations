@@ -1,7 +1,7 @@
-Feature: Calculate ECF payments
+Feature: ECF payment calculation engine
 
   Scenario Outline: Calculation of ECF service fees
-    Given the recruitment target is <recruitment_target>
+    Given the ECF recruitment target is <recruitment_target>
       # Band A cost from cell F20:
       And Band A per-participant price is <band_a>
       # Band B cost from cell F21:
@@ -10,7 +10,7 @@ Feature: Calculate ECF payments
       And Band C per-participant price is <band_c>
       # Setup cost from cell Y20:
       And The set-up cost is <setup_cost>
-    When I run the calculation
+    When I run the ECF calculation
     # per-participant service fee from cell E60
     Then The per-participant service fee is <output_per_participant_fee>
       # total service fee from cell D60
