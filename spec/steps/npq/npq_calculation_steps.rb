@@ -53,6 +53,7 @@ module NpqCalculationSteps
 
   step "the total payable amount in all outputs should be £:decimal_placeholder" do |expected_value|
     expect(@result[:output][:qualifications].values.map { |q| q[:service_fee] }.sum).to eq(expected_value)
+    expect(@result[:output][:payment_schedule].values.sum).to eq(expected_value)
   end
 end
 
