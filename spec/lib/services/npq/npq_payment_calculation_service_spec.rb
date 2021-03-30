@@ -20,6 +20,7 @@ describe NpqPaymentCalculationService do
   it "returns BigDecimal for all money outputs" do
     expect(@result.dig(:output, :qualifications, QUALIFICATION_NAME, :service_fee)).to be_a(BigDecimal)
     expect(@result.dig(:output, :qualifications, QUALIFICATION_NAME, :monthly_service_fee)).to be_a(BigDecimal)
+    expect(@result.dig(:output, :payment_schedule).values).to all(be_a(BigDecimal))
   end
 
   it "includes config in the output" do
