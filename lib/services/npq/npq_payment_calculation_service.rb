@@ -6,10 +6,9 @@ class NpqPaymentCalculationService
   end
 
   def calculate
-    payment_schedule = {}
-    @config[:qualifications].each do |_name, qualification_inputs|
+    payment_schedule = @config[:qualifications].each_with_object({}) do |(_name, qualification_inputs), schedule|
       (1..qualification_inputs[:minimum_delivery_months]).each do |month|
-        payment_schedule[month] = (payment_schedule[month] || 0) + monthly_service_fee(qualification_inputs)
+        schedule[month] = (schedule[month] || 0) + monthly_service_fee(qualification_inputs)
       end
     end
 
