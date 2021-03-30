@@ -10,9 +10,12 @@ Feature: NPQ payment calculation engine
       | NPQ for Senior Leadership (NPQSL)              | £1149             | 25                      | £45,9600.00          | £18,384.00                   |
       | NPQ for Headship (NPQH)                        | £1985             | 31                      | £794,000.00          | £25,612.90                   |
       | NPQ for Executive Leadership (NPQEL)           | £4099             | 25                      | £1,639,600.00        | £65,584.00                   |
+
     When I run the NPQ calculation
-    Then the correct monthly service fees are calculated
-    And the payment schedule is:
+
+    Then the total payable amount in all outputs should be £3,975,600.00
+    And the ouput should have the above service fees
+    And the output should include the following payment schedule:
       | Month | Service fee total | Comments                                               |
       | 1     | £16,6549.31       |                                                        |
       | 2     | £16,6549.31       |                                                        |

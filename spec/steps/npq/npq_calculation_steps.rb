@@ -31,7 +31,7 @@ module NpqCalculationSteps
     @result = calculator.calculate
   end
 
-  step "the correct monthly service fees are calculated" do
+  step "the ouput should have the above service fees" do
     aggregate_failures "service fees" do
       @qualifications.each do |name, values|
         # Output keyed on name because we don't currently have a database storage of qualifications to give us anything else to key on.
@@ -41,7 +41,7 @@ module NpqCalculationSteps
     end
   end
 
-  step "the payment schedule is:" do |table|
+  step "the output should include the following payment schedule:" do |table|
     @expected_payment_schedule = {}
     table.hashes.each do |row|
       @expected_payment_schedule[row["Month"].to_i] = CurrencyParser.currency_to_big_decimal(row["Service fee total"])
@@ -49,6 +49,10 @@ module NpqCalculationSteps
     @expected_payment_schedule.each do |month, expected_amount|
       expect_with_context(@result.dig(:output, :payment_schedule, month), expected_amount, "Payment for month '#{month}'")
     end
+  end
+
+  step "the total payable amount in all outputs should be £:decimal_placeholder" do |expected_value|
+    expect(@result[:output][:qualifications].values.map { |q| q[:service_fee] }.sum).to eq(expected_value)
   end
 end
 
