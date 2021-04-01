@@ -1,7 +1,8 @@
 Feature: NPQ payment calculation engine
 
-  Scenario: Calculation of NPQ service fees
-    Given the NPQ recruitment target is 1000
+  @npq
+  Scenario: Calculation of service fees
+    Given the recruitment target is 1000
     And there are the following qualifications:
       | Name                                           | Price per-teacher | Minimum delivery months | Expected service fee | Expected monthly service fee |
       | NPQ Leading Teacher Development (NPQLTD)       | £902              | 19                      | £360,800.00          | £18,989.47                   |
@@ -10,7 +11,7 @@ Feature: NPQ payment calculation engine
       | NPQ for Senior Leadership (NPQSL)              | £1149             | 25                      | £45,9600.00          | £18,384.00                   |
       | NPQ for Headship (NPQH)                        | £1985             | 31                      | £794,000.00          | £25,612.90                   |
       | NPQ for Executive Leadership (NPQEL)           | £4099             | 25                      | £1,639,600.00        | £65,584.00                   |
-    When I run the NPQ calculation
+    When I run the calculation
     Then the correct monthly service fees are calculated
     And the payment schedule is:
       | Month | Service fee total | Comments                                               |
