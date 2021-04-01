@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module NpqCalculationSteps
-  step "the NPQ recruitment target is :decimal_placeholder" do |value|
+  step "the recruitment target is :decimal_placeholder" do |value|
     @recruitment_target = value.to_i
   end
 
@@ -17,7 +17,7 @@ module NpqCalculationSteps
     end
   end
 
-  step "I run the NPQ calculation" do
+  step "I run the calculation" do
     config = {
       recruitment_target: @recruitment_target,
       qualifications: @qualifications.transform_values do |values|
@@ -53,5 +53,5 @@ module NpqCalculationSteps
 end
 
 RSpec.configure do |config|
-  config.include NpqCalculationSteps
+  config.include NpqCalculationSteps, npq: true
 end
