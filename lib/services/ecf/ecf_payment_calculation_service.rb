@@ -9,9 +9,20 @@ class EcfPaymentCalculationService
     {
       input: @config,
       output: {
-        per_participant_service_fee: per_participant_service_fee,
-        total_service_fee: total_service_fee,
-        monthly_service_fee: monthly_service_fee,
+        service_fees:{
+          per_participant_service_fee: per_participant_service_fee,
+          total_service_fee: total_service_fee,
+          monthly_service_fee: monthly_service_fee,
+        },
+        variable_fees:{
+          starting_per_teacher_payment: 123,
+          starting_payment: 12356,
+          completion_per_teacher_payment: 123,
+          completion_payment: 34589,
+          retention_payment_schedule: [
+            # todo
+          ],
+        }
       },
     }
   end
