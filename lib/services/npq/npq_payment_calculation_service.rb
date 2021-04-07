@@ -9,19 +9,20 @@ class NpqPaymentCalculationService
     service_fee_payment_schedule = (1..number_of_monthly_payments).each_with_object({}) do |i, schedule|
       schedule[i] = monthly_service_fee
     end
+
     {
       input: @config,
       output: {
-        service_fees:{
+        service_fees: {
           payment_schedule: service_fee_payment_schedule,
         },
-        variable_fees: retention_points.transform_values do |values|
+        variable_fees:
+          retention_points&.transform_values do |values|
             {
               per_teacher_variable_fee: per_teacher_variable_fee,
               total_variable_fee: total_variable_fee(values[:retained_participants]),
             }
-          },
-        },
+          end,
       },
     }
   end
@@ -37,11 +38,11 @@ private
   end
 
   def recruitment_target
-    @config[:recruitment_target]
+    @config[:recruitment_target] || 0
   end
 
   def number_of_monthly_payments
-    @config[:number_of_monthly_payments]
+    @config[:number_of_monthly_payments] || 0
   end
 
   def payment_split

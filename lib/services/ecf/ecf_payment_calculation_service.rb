@@ -9,25 +9,38 @@ class EcfPaymentCalculationService
     {
       input: @config,
       output: {
-        service_fees:{
+        service_fees: {
           per_participant_service_fee: per_participant_service_fee,
           total_service_fee: total_service_fee,
           monthly_service_fee: monthly_service_fee,
         },
-        variable_fees:{
-          starting_per_teacher_payment: 123,
-          starting_payment: 12356,
-          completion_per_teacher_payment: 123,
-          completion_payment: 34589,
-          retention_payment_schedule: [
-            # todo
-          ],
-        }
+        variable_fees: {
+          starting_per_teacher_payment: starting_per_teacher_fee,
+          starting_payment: starting_payment,
+          completion_payment: completion_payment,
+          retention_payment_schedule: (1..4).map { |_a| retention_payment },
+        },
       },
     }
   end
 
 private
+
+  def starting_per_teacher_fee
+    band_a * 0.6
+  end
+
+  def starting_payment
+    (starting_per_teacher_fee * 0.2).round(0)
+  end
+
+  def completion_payment
+    (starting_per_teacher_fee * 0.2).round(0)
+  end
+
+  def retention_payment
+    (starting_per_teacher_fee * 0.15).round(0)
+  end
 
   def per_participant_service_fee
     band_a * 0.4

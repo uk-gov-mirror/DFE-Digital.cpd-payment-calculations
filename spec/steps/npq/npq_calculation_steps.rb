@@ -19,8 +19,7 @@ module NpqCalculationSteps
       number_of_monthly_payments: @number_of_monthly_payments,
       price_per_participant: @price_per_participant,
     }
-    calculator = NpqPaymentCalculationService.new(config)
-    calculator.service_fee_schedule
+    NpqPaymentCalculationService.new(config).calculate
   end
 
   step "the service fee payment schedule should be:" do |table|
@@ -29,14 +28,14 @@ module NpqCalculationSteps
       table.hashes.each do |row|
         month = row["Month"].to_i
         expected_service_fee_total = CurrencyParser.currency_to_big_decimal(row["Service fee total"])
-        expect_with_context(result.dig(:output, :service_fee_payment_schedule, month), expected_service_fee_total, "Payment for month '#{month}'")
+        expect_with_context(result.dig(:output, :service_fees, :payment_schedule, month), expected_service_fee_total, "Payment for month '#{month}'")
       end
     end
   end
 
   step "the service fee total should be £:decimal_placeholder" do |expected_amount|
     result = calculate_service_fee_schedule
-    expect(result.dig(:output, :service_fee_payment_schedule).values.sum).to eq(expected_amount)
+    expect(result.dig(:output, :service_fees, :payment_schedule).values.sum).to eq(expected_amount)
   end
 
   step "there are the following retention points:" do |table|
@@ -66,8 +65,7 @@ module NpqCalculationSteps
       price_per_participant: @price_per_participant,
       retention_points: retention_points,
     }
-    calculator = NpqPaymentCalculationService.new(config)
-    calculator.variable_fee_schedule
+    NpqPaymentCalculationService.new(config).calculate
   end
 
   step "expected variable fees should be as above" do
@@ -75,11 +73,11 @@ module NpqCalculationSteps
     aggregate_failures "variable fees" do
       @retention_table.each do |retention_point, values|
         expect_with_context(
-          result.dig(:output, :variable_fee_schedule, retention_point, :per_teacher_variable_fee), values[:expected_per_teacher_variable_fee], "Payment for retention point '#{retention_point}'"
+          result.dig(:output, :variable_fees, retention_point, :per_teacher_variable_fee), values[:expected_per_teacher_variable_fee], "Payment for retention point '#{retention_point}'"
         )
 
         expect_with_context(
-          result.dig(:output, :variable_fee_schedule, retention_point, :total_variable_fee), values[:expected_variable_fee], "Total variable fee '#{retention_point}'"
+          result.dig(:output, :variable_fees, retention_point, :total_variable_fee), values[:expected_variable_fee], "Total variable fee '#{retention_point}'"
         )
       end
     end
