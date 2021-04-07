@@ -19,6 +19,7 @@ class NpqPaymentCalculationService
 
   def variable_fee_schedule
     {
+      input: @config,
       output: {
         variable_fee_schedule: retention_points.transform_values do |values|
           {
