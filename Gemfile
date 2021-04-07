@@ -3,6 +3,8 @@
 source "https://rubygems.org"
 
 group :dev, :test do
+  gem "guard"
+  gem "guard-rspec", require: false
   gem "pry"
 end
 
