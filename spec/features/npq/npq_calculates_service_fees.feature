@@ -1,48 +1,48 @@
-Feature: NPQ payment calculation engine
+@npq
+Feature: NPQ single-qualification payment schedule calculation
 
-  @npq
-  Scenario: Calculation of service fees
-    Given the recruitment target is 1000
-    And there are the following qualifications:
-      | Name                                           | Price per-teacher | Minimum delivery months | Expected service fee | Expected monthly service fee |
-      | NPQ Leading Teacher Development (NPQLTD)       | £902              | 19                      | £360,800.00          | £18,989.47                   |
-      | NPQ for Leading Teaching (NPQLT)               | £902              | 19                      | £360,800.00          | £18,989.47                   |
-      | NPQ for Leading Behaviour and Culture (NPQLBC) | £902              | 19                      | £360,800.00          | £18,989.47                   |
-      | NPQ for Senior Leadership (NPQSL)              | £1149             | 25                      | £45,9600.00          | £18,384.00                   |
-      | NPQ for Headship (NPQH)                        | £1985             | 31                      | £794,000.00          | £25,612.90                   |
-      | NPQ for Executive Leadership (NPQEL)           | £4099             | 25                      | £1,639,600.00        | £65,584.00                   |
-    When I run the calculation
-    Then the correct monthly service fees are calculated
-    And the payment schedule is:
-      | Month | Service fee total | Comments                                               |
-      | 1     | £16,6549.31       |                                                        |
-      | 2     | £16,6549.31       |                                                        |
-      | 3     | £16,6549.31       |                                                        |
-      | 4     | £16,6549.31       |                                                        |
-      | 5     | £16,6549.31       |                                                        |
-      | 6     | £16,6549.31       |                                                        |
-      | 7     | £16,6549.31       |                                                        |
-      | 8     | £16,6549.31       |                                                        |
-      | 9     | £16,6549.31       |                                                        |
-      | 10    | £16,6549.31       |                                                        |
-      | 11    | £16,6549.31       |                                                        |
-      | 12    | £16,6549.31       |                                                        |
-      | 13    | £16,6549.31       |                                                        |
-      | 14    | £16,6549.31       |                                                        |
-      | 15    | £16,6549.31       |                                                        |
-      | 16    | £16,6549.31       |                                                        |
-      | 17    | £16,6549.31       |                                                        |
-      | 18    | £16,6549.31       |                                                        |
-      | 19    | £16,6549.31       | Last month with all courses running                    |
-      | 20    | £10,9580.90       | Lower than month 19 because some courses have finished |
-      | 21    | £10,9580.90       |                                                        |
-      | 22    | £10,9580.90       |                                                        |
-      | 23    | £10,9580.90       |                                                        |
-      | 24    | £10,9580.90       |                                                        |
-      | 25    | £10,9580.90       |                                                        |
-      | 26    | £25,612.90        |                                                        |
-      | 27    | £25,612.90        |                                                        |
-      | 28    | £25,612.90        |                                                        |
-      | 29    | £25,612.90        |                                                        |
-      | 30    | £25,612.90        |                                                        |
-      | 31    | £25,612.90        | todo: Includes rounding?                               |
+  Scenario: Calculation of service fee payment schedule
+    Given there's an qualification with a price-per-participant of £555
+      And there are 19 monthly service fee payments
+      And the recruitment target is 1000
+    Then the service fee payment schedule should be:
+        | Month | Service fee total |
+        | 1     | £11,684.21        |
+        | 2     | £11,684.21        |
+        | 3     | £11,684.21        |
+        | 4     | £11,684.21        |
+        | 5     | £11,684.21        |
+        | 6     | £11,684.21        |
+        | 7     | £11,684.21        |
+        | 8     | £11,684.21        |
+        | 9     | £11,684.21        |
+        | 10    | £11,684.21        |
+        | 11    | £11,684.21        |
+        | 12    | £11,684.21        |
+        | 13    | £11,684.21        |
+        | 14    | £11,684.21        |
+        | 15    | £11,684.21        |
+        | 16    | £11,684.21        |
+        | 17    | £11,684.21        |
+        | 18    | £11,684.21        |
+        | 19    | £11,684.21        |
+      And the service fee total should be £221,999.99
+
+  Scenario: Calculation of variable fee payment schedule with one retention point
+    Given there's an qualification with a price-per-participant of £555
+      And there are the following retention points:
+        | Payment Type | Retained Participants | Expected Per-Teacher Variable Fee | Expected Variable Fee |
+        | Commencement | 1000                  | £111                              | £111,000.00           |
+        | Retention 1  | 700                   | £111                              | £77,700.00            |
+        | Completion   | 300                   | £111                              | £33,300.00            |
+    Then expected variable fees should be as above
+
+  Scenario: Calculation of variable fee payment schedule with two retention points
+    Given there's an qualification with a price-per-participant of £823
+      And there are the following retention points:
+        | Payment Type | Retained Participants | Expected Per-Teacher Variable Fee | Expected Variable Fee |
+        | Commencement | 900                   | £123.45                           | £111,105.00           |
+        | Retention 1  | 700                   | £123.45                           | £86,415.00            |
+        | Retention 2  | 650                   | £123.45                           | £80,242.50            |
+        | Completion   | 432                   | £123.45                           | £53,330.40            |
+    Then expected variable fees should be as above

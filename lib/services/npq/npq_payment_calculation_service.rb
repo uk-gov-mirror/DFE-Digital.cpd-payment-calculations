@@ -5,34 +5,67 @@ class NpqPaymentCalculationService
     @config = config
   end
 
-  def calculate
-    payment_schedule = @config[:qualifications].each_with_object({}) do |(_name, qualification_inputs), schedule|
-      (1..qualification_inputs[:minimum_delivery_months]).each do |month|
-        schedule[month] = (schedule[month] || 0) + monthly_service_fee(qualification_inputs)
-      end
+  def service_fee_schedule
+    service_fee_payment_schedule = (1..number_of_monthly_payments).each_with_object({}) do |i, schedule|
+      schedule[i] = monthly_service_fee
     end
-
     {
       input: @config,
       output: {
-        qualifications: @config[:qualifications].transform_values do |qualification|
-          {
-            service_fee: total_qualification_service_fee(qualification),
-            monthly_service_fee: monthly_service_fee(qualification),
-          }
-        end,
-        payment_schedule: payment_schedule,
+        service_fee_payment_schedule: service_fee_payment_schedule,
       },
     }
   end
 
-  def total_qualification_service_fee(qualification)
-    qualification[:price_per_teacher] * 0.4 * @config[:recruitment_target]
+  def variable_fee_schedule
+    {
+      input: @config,
+      output: {
+        variable_fee_schedule: retention_points.transform_values do |values|
+          {
+            per_teacher_variable_fee: per_teacher_variable_fee,
+            total_variable_fee: total_variable_fee(values[:retained_participants]),
+          }
+        end,
+      },
+    }
   end
 
 private
 
-  def monthly_service_fee(qualification)
-    (total_qualification_service_fee(qualification) / qualification[:minimum_delivery_months].to_d).round(2)
+  def retention_points
+    @config[:retention_points]
+  end
+
+  def price_per_participant
+    @config[:price_per_participant]
+  end
+
+  def recruitment_target
+    @config[:recruitment_target]
+  end
+
+  def number_of_monthly_payments
+    @config[:number_of_monthly_payments]
+  end
+
+  def payment_split
+    1.0 / retention_points.length
+  end
+
+  def total_service_fee
+    price_per_participant * 0.4 * recruitment_target
+  end
+
+  def monthly_service_fee
+    (total_service_fee / number_of_monthly_payments.to_d).round(2)
+  end
+
+  def per_teacher_variable_fee
+    (price_per_participant * 0.6 * payment_split).round(2)
+  end
+
+  def total_variable_fee(retained_participants)
+    (per_teacher_variable_fee * retained_participants).round(2)
   end
 end
