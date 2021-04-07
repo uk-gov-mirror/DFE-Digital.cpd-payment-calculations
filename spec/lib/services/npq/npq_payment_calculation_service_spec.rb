@@ -10,7 +10,7 @@ describe NpqPaymentCalculationService do
       number_of_monthly_payments: 19,
     }
     calculator = NpqPaymentCalculationService.new(@config)
-    @result = calculator.calculate
+    @result = calculator.service_fee_schedule
   end
 
   it "returns BigDecimal for all money outputs" do
