@@ -15,7 +15,8 @@ class EcfPaymentCalculationService
           monthly_service_fee: monthly_service_fee,
         },
         variable_fees: {
-          starting_per_teacher_payment: starting_per_teacher_fee,
+          per_participant_variable_payment: per_participant_variable_payment,
+          starting_per_participant_payment: starting_per_participant_fee,
           starting_payment: starting_payment,
           retention_payment_schedule: (1..4).map { |_a| retention_payment },
           completion_per_participant_payment: completion_payment_per_participant,
@@ -27,16 +28,20 @@ class EcfPaymentCalculationService
 
 private
 
-  def starting_per_teacher_fee
+  def per_participant_variable_payment
+    band_a * 0.6
+  end
+
+  def starting_per_participant_fee
     band_a * 0.6
   end
 
   def starting_payment
-    (starting_per_teacher_fee * 0.2)
+    (starting_per_participant_fee * 0.2)
   end
 
   def starting_payment_per_participant
-    (starting_per_teacher_fee * 0.2)
+    (starting_per_participant_fee * 0.2)
   end
 
   def completion_payment
@@ -44,11 +49,11 @@ private
   end
 
   def completion_payment_per_participant
-    (starting_per_teacher_fee * 0.2)
+    (starting_per_participant_fee * 0.2)
   end
 
   def retention_payment
-    (starting_per_teacher_fee * 0.15)
+    (starting_per_participant_fee * 0.15)
   end
 
   def per_participant_service_fee

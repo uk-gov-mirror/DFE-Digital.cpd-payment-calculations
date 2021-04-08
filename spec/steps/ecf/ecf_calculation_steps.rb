@@ -35,7 +35,7 @@ module EcfCalculationSteps
   end
 
   step "the variable payment per-participant should be £:decimal_placeholder" do |expected_value|
-    #todo
+    expect(@result.dig(:output, :variable_fees, :per_participant_variable_payment)).to eq(expected_value)
   end
 
   step "the variable payment schedule should be as above" do
