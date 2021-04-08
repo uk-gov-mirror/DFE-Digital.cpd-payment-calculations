@@ -41,7 +41,7 @@ module EcfCalculationSteps
   end
 
   step "The starting payment per-teacher variable fee is £:decimal_placeholder" do |expected_value|
-    expect()
+    # expect()
   end
 
   step "The starting variable fee is £:decimal_placeholder" do |expected_value|

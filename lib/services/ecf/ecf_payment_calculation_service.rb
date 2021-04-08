@@ -17,8 +17,9 @@ class EcfPaymentCalculationService
         variable_fees: {
           starting_per_teacher_payment: starting_per_teacher_fee,
           starting_payment: starting_payment,
-          completion_payment: completion_payment,
           retention_payment_schedule: (1..4).map { |_a| retention_payment },
+          completion_per_participant_payment: completion_payment_per_participant,
+          completion_payment: completion_payment,
         },
       },
     }
@@ -39,7 +40,7 @@ private
   end
 
   def completion_payment
-    completion_payment_per_participant *
+    completion_payment_per_participant * 1
   end
 
   def completion_payment_per_participant
