@@ -40,14 +40,8 @@ module EcfCalculationSteps
     end
   end
 
-  step "The starting payment per-teacher variable fee is £:decimal_placeholder" do |expected_value|
+  step "The variable payment per-teacher should be £:decimal_placeholder" do |expected_value|
     # expect()
-  end
-
-  step "The starting variable fee is £:decimal_placeholder" do |expected_value|
-  end
-
-  step "The completion payment per-teacher variable fee is £:decimal_placeholder" do |expected_value|
   end
 
   step "The retention payment schedule should be:" do |table|
