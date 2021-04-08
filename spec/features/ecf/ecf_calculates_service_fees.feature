@@ -7,12 +7,12 @@ Feature: ECF payment calculation engine
       And Band A per-participant price is £995
       And there are the following retention numbers:
         | Payment Type | Retained Participants | Expected Per-Participant Variable Fee    | Expected Variable Fee |
-        | Start        | 1900                  | £119.40                                  | £238,800              |
-        | Retention 1  | 1700                  | £89.55                                   | £179,100              |
-        | Retention 2  | 1500                  | £89.55                                   | £179,100              |
-        | Retention 3  | 1000                  | £89.55                                   | £179,100              |
-        | Retention 4  | 800                   | £89.55                                   | £179,100              |
-        | Completion   | 500                   | £119.40                                  | £238,800              |
+        | Start        | 1900                  | £119.40                                  | £226,860              |
+        | Retention 1  | 1700                  | £89.55                                   | £238,800              |
+        | Retention 2  | 1500                  | £89.55                                   | £238,800              |
+        | Retention 3  | 1000                  | £89.55                                   | £238,800              |
+        | Retention 4  | 800                   | £89.55                                   | £238,800              |
+        | Completion   | 500                   | £119.40                                  | £59,700               |
     When I run the calculation
     Then the per-participant service fee should be £398
       And the total service fee should be £796,000

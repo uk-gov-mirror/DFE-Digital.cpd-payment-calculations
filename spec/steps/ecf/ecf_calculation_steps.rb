@@ -24,6 +24,7 @@ module EcfCalculationSteps
     config = {
       recruitment_target: @recruitment_target,
       band_a: @band_a,
+      retained_participants: @retention_table.reduce({}) { |res, hash| res.merge({ hash[:payment_type] => hash[:retained_participants] }) },
     }
     calculator = EcfPaymentCalculationService.new(config)
     @result = calculator.calculate
@@ -46,7 +47,6 @@ module EcfCalculationSteps
   end
 
   step "the variable payment schedule should be as above" do
-    puts @retention_table
     aggregate_failures "variable fees" do
       start_expectations = @retention_table.detect { |r| r[:payment_type] == "Start" }
       expect(@result.dig(:output, :variable_fees, :starting_per_participant_payment)).to eq(start_expectations[:expected_per_participant_variable_fee])
