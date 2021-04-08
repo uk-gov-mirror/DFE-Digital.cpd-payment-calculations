@@ -8,6 +8,7 @@ describe EcfPaymentCalculationService do
     expect(result.dig(:output, :service_fees, :per_participant_service_fee)).to be_a(BigDecimal)
     expect(result.dig(:output, :service_fees, :total_service_fee)).to be_a(BigDecimal)
     expect(result.dig(:output, :service_fees, :monthly_service_fee)).to be_a(BigDecimal)
+    expect(result.dig(:output, :variable_fees, :todo)).to be_a(BigDecimal)
   end
 
   it "includes config in the output" do
