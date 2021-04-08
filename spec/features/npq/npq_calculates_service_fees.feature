@@ -2,7 +2,7 @@
 Feature: NPQ single-qualification payment schedule calculation
 
   Scenario: Calculation of service fee payment schedule
-    Given there's an qualification with a price-per-participant of £555
+    Given there's an qualification with a price-per-participant of £902
       And there are 19 monthly service fee payments
       And the recruitment target is 1000
     Then the service fee payment schedule should be:
