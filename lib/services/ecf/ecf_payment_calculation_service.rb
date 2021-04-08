@@ -31,15 +31,15 @@ private
   end
 
   def starting_payment
-    (starting_per_teacher_fee * 0.2).round(0)
+    (starting_per_teacher_fee * 0.2)
   end
 
   def completion_payment
-    (starting_per_teacher_fee * 0.2).round(0)
+    (starting_per_teacher_fee * 0.2)
   end
 
   def retention_payment
-    (starting_per_teacher_fee * 0.15).round(0)
+    (starting_per_teacher_fee * 0.15)
   end
 
   def per_participant_service_fee

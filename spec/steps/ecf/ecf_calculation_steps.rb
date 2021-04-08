@@ -50,12 +50,14 @@ module EcfCalculationSteps
   end
 
   step "The retention payment schedule should be:" do |table|
-    puts "*** result -> #{@result}"
     aggregate_failures "variable fees" do
       table.hashes.each_with_index do |row, i|
         expected_per_teacher_variable_fee = CurrencyParser.currency_to_big_decimal(row["Expected Per-Teacher Variable Fee"])
         expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i), expected_per_teacher_variable_fee, "Per teacher variable")
-        # TODO: variable fee
+
+        participants = row["Retained Participants"].to_i
+        expected_variable_fee = CurrencyParser.currency_to_big_decimal(row["Expected Variable Fee"])
+        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i) * participants, expected_variable_fee, "Variable fee")
       end
     end
   end
