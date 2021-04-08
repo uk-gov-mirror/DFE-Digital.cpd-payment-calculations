@@ -34,7 +34,15 @@ private
     (starting_per_teacher_fee * 0.2)
   end
 
+  def starting_payment_per_participant
+    (starting_per_teacher_fee * 0.2)
+  end
+
   def completion_payment
+    completion_payment_per_participant *
+  end
+
+  def completion_payment_per_participant
     (starting_per_teacher_fee * 0.2)
   end
 
