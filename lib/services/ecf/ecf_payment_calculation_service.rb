@@ -15,7 +15,7 @@ class EcfPaymentCalculationService
           monthly_service_fee: monthly_service_fee,
         },
         variable_fees: {
-          per_participant_variable_payment: per_participant_variable_payment,
+          per_participant_payment: per_participant_variable_payment,
           starting_per_participant_payment: starting_per_participant_fee,
           starting_payment: starting_payment,
           retention_payment_schedule: (1..4).map { |_a| retention_payment },
