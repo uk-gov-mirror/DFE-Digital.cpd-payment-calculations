@@ -9,6 +9,10 @@ module EcfCalculationSteps
     @band_a = value
   end
 
+  step "there are the following retention numbers:" do |table|
+    @retention_table = table
+  end
+
   step "I run the calculation" do
     config = {
       recruitment_target: @recruitment_target,
@@ -18,30 +22,24 @@ module EcfCalculationSteps
     @result = calculator.calculate
   end
 
-  step "The per-participant service fee should be £:decimal_placeholder" do |expected_value|
+  step "the per-participant service fee should be £:decimal_placeholder" do |expected_value|
     expect(@result.dig(:output, :service_fees, :per_participant_service_fee)).to eq(expected_value)
   end
 
-  step "The total service fee should be £:decimal_placeholder" do |expected_value|
+  step "the total service fee should be £:decimal_placeholder" do |expected_value|
     expect(@result.dig(:output, :service_fees, :total_service_fee)).to eq(expected_value)
   end
 
-  step "The monthly service fee should be £:decimal_placeholder" do |expected_value|
+  step "the monthly service fee should be £:decimal_placeholder" do |expected_value|
     expect(@result.dig(:output, :service_fees, :monthly_service_fee)).to eq(expected_value)
   end
 
-  step "The variable payment schedule should be:" do |table|
-    aggregate_failures "variable fees" do
-      table.hashes.each do |row|
-        # month = row["Month"].to_i
-        expected_service_fee_total = CurrencyParser.currency_to_big_decimal(row["Service fee total"])
-        expect_with_context(result.dig(:output, :service_fee_payment_schedule, month), expected_service_fee_total, "Payment for month '#{month}'")
-      end
-    end
+  step "the variable payment per-participant should be £:decimal_placeholder" do |expected_value|
+    #todo
   end
 
-  step "The variable payment per-teacher should be £:decimal_placeholder" do |expected_value|
-    # expect()
+  step "the variable payment schedule should be as above" do
+    #todo
   end
 
   step "The retention payment schedule should be:" do |table|
