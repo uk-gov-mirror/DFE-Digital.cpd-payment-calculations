@@ -33,15 +33,11 @@ private
   end
 
   def starting_per_participant_fee
-    band_a * 0.6
+    per_participant_variable_payment * 0.2
   end
 
-  def starting_payment
-    (starting_per_participant_fee * 0.2)
-  end
-
-  def starting_payment_per_participant
-    (starting_per_participant_fee * 0.2)
+  def starting_payment(retained_participants)
+    starting_per_participant_fee * retained_participants
   end
 
   def completion_payment
