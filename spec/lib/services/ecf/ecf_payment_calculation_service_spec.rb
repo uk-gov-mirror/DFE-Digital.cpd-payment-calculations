@@ -21,8 +21,8 @@ describe EcfPaymentCalculationService do
     expect(result.dig(:output, :service_fees, :per_participant_service_fee)).to be_a(BigDecimal)
     expect(result.dig(:output, :service_fees, :total_service_fee)).to be_a(BigDecimal)
     expect(result.dig(:output, :service_fees, :monthly_service_fee)).to be_a(BigDecimal)
-    expect(result.dig(:output, :variable_fees, :per_participant)).to be_a(BigDecimal)
-    result.dig(:output, :variable_fees, :retention_payment_schedule).each do |_key, value|
+    expect(result.dig(:output, :variable_payments, :per_participant)).to be_a(BigDecimal)
+    result.dig(:output, :variable_payments, :retention_payment_schedule).each do |_key, value|
       expect(value[:per_participant]).to be_a(BigDecimal)
       expect(value[:subtotal]).to be_a(BigDecimal)
     end

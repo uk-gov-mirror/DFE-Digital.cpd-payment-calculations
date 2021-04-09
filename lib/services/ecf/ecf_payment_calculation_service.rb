@@ -14,7 +14,7 @@ class EcfPaymentCalculationService
           total_service_fee: total_service_fee,
           monthly_service_fee: monthly_service_fee,
         },
-        variable_fees: {
+        variable_payments: {
           per_participant: per_participant_variable_payment,
           retention_payment_schedule: retention_payment_schedule,
         },
