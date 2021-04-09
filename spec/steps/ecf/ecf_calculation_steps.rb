@@ -14,8 +14,8 @@ module EcfCalculationSteps
       {
         payment_type: values["Payment Type"],
         retained_participants: values["Retained Participants"].to_i,
-        expected_per_participant_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Per-Participant Variable Fee"]),
-        expected_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Variable Fee Subtotal"]),
+        expected_per_participant_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Per-Participant Variable Payment"]),
+        expected_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Variable Payment Subtotal"]),
       }
     end
   end
@@ -43,7 +43,7 @@ module EcfCalculationSteps
   end
 
   step "the variable payment per-participant should be £:decimal_placeholder" do |expected_value|
-    expect(@result.dig(:output, :variable_fees, :per_participant_payment)).to eq(expected_value)
+    expect(@result.dig(:output, :variable_fees, :per_participant)).to eq(expected_value)
   end
 
   step "the variable payment schedule should be as above" do
@@ -54,20 +54,7 @@ module EcfCalculationSteps
         actual_values = actual_schedule[expectation[:payment_type]]
         expect_with_context(actual_values[:retained_participants], expectation[:retained_participants], "#{expectation[:payment_type]} retention numbers passthrough")
         expect_with_context(actual_values[:per_participant], expectation[:expected_per_participant_variable_fee], "#{expectation[:payment_type]} per participant payment")
-        expect_with_context(actual_values[:fee], expectation[:expected_variable_fee], "#{expectation[:payment_type]} variable fee")
-      end
-    end
-  end
-
-  step "The retention payment schedule should be:" do |table|
-    aggregate_failures "variable fees" do
-      table.hashes.each_with_index do |row, i|
-        expected_per_participant = CurrencyParser.currency_to_big_decimal(row["Expected Per-Participant Variable Fee"])
-        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i), expected_per_participant, "Per teacher variable")
-
-        retained_participants = row["Retained Participants"].to_i
-        expected_variable_fee = CurrencyParser.currency_to_big_decimal(row["Expected Variable Fee"])
-        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i) * retained_participants, expected_variable_fee, "Variable fee")
+        expect_with_context(actual_values[:subtotal], expectation[:expected_variable_fee], "#{expectation[:payment_type]} variable fee")
       end
     end
   end
