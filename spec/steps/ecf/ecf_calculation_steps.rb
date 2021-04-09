@@ -48,13 +48,14 @@ module EcfCalculationSteps
   end
 
   step "the variable payment schedule should be as above" do
-    puts "* result -> #{@result}"
     aggregate_failures "variable fees" do
-      expect(@result.dig(:output, :variable_fees, :retention_payment_schedule).keys.size).to eq(@retention_table.key.size)
-
-      @retention_table.each do |payment_type, value|
-        expected_value = retention_expectations.detect {}
-        expect(@result.dig(:output, :variable_fees, :retention_payment_schedule)).to eq
+      actual_schedule = @result.dig(:output, :variable_fees, :retention_payment_schedule)
+      expect(actual_schedule.length).to eq(@retention_table.length)
+      @retention_table.each do |expectation|
+        actual_values = actual_schedule[expectation[:payment_type]]
+        expect_with_context(actual_values[:retained], expectation[:retained_participants], "#{expectation[:payment_type]} retention numbers passthrough")
+        expect_with_context(actual_values[:per_participant], expectation[:expected_per_participant_variable_fee], "#{expectation[:payment_type]} per participant payment")
+        expect_with_context(actual_values[:fee], expectation[:expected_variable_fee], "#{expectation[:payment_type]} variable fee")
       end
     end
   end
