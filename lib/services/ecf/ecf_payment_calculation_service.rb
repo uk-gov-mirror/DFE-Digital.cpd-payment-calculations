@@ -16,7 +16,7 @@ class EcfPaymentCalculationService
         },
         variable_fees: {
           per_participant_payment: per_participant_variable_payment,
-          retention_payment_schedule: retention_payment_schedule
+          retention_payment_schedule: retention_payment_schedule,
         },
       },
     }
@@ -41,7 +41,7 @@ private
       result[key] = {
         retained: value,
         per_participant: per_participant_fee(key),
-        fee: fee(key, value)
+        fee: fee(key, value),
       }
     end
   end
