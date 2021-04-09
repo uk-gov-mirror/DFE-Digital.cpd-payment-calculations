@@ -52,7 +52,7 @@ module EcfCalculationSteps
       expect(actual_schedule.length).to eq(@retention_table.length)
       @retention_table.each do |expectation|
         actual_values = actual_schedule[expectation[:payment_type]]
-        expect_with_context(actual_values[:retained], expectation[:retained_participants], "#{expectation[:payment_type]} retention numbers passthrough")
+        expect_with_context(actual_values[:retained_participants], expectation[:retained_participants], "#{expectation[:payment_type]} retention numbers passthrough")
         expect_with_context(actual_values[:per_participant], expectation[:expected_per_participant_variable_fee], "#{expectation[:payment_type]} per participant payment")
         expect_with_context(actual_values[:fee], expectation[:expected_variable_fee], "#{expectation[:payment_type]} variable fee")
       end

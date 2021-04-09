@@ -39,7 +39,7 @@ private
   def retention_payment_schedule
     @config.dig(:retained_participants).each_with_object({}) do |(payment_type, retained_participants), result|
       result[payment_type] = {
-        retained: retained_participants,
+        retained_participants: retained_participants,
         per_participant: per_participant_fee(payment_type),
         fee: fee(payment_type, retained_participants),
       }
