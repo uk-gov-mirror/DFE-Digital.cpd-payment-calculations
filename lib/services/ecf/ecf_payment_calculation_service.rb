@@ -24,6 +24,14 @@ class EcfPaymentCalculationService
 
 private
 
+  def band_a
+    @config[:band_a]
+  end
+
+  def recruitment_target
+    @config[:recruitment_target]
+  end
+
   def per_participant_variable_payment
     band_a * 0.6
   end
@@ -57,15 +65,5 @@ private
   def monthly_service_fee
     number_of_monthly_payments = 29
     (total_service_fee / number_of_monthly_payments).round(0).to_d
-  end
-
-  # config accessors
-
-  def band_a
-    BigDecimal(@config[:band_a], 10)
-  end
-
-  def recruitment_target
-    @config[:recruitment_target]
   end
 end

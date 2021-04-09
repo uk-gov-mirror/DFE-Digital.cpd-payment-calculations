@@ -4,7 +4,7 @@ describe EcfPaymentCalculationService do
   let(:config) do
     {
       recruitment_target: 2000,
-      band_a: 995,
+      band_a: BigDecimal(995, 10),
       retained_participants: {
         "Start" => 1900,
         "Retention 1" => 1700,

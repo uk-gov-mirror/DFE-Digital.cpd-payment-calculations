@@ -15,7 +15,7 @@ module EcfCalculationSteps
         payment_type: values["Payment Type"],
         retained_participants: values["Retained Participants"].to_i,
         expected_per_participant_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Per-Participant Variable Fee"]),
-        expected_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Variable Fee"]),
+        expected_variable_fee: CurrencyParser.currency_to_big_decimal(values["Expected Variable Fee Subtotal"]),
       }
     end
   end
