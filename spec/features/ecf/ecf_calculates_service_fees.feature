@@ -18,11 +18,3 @@ Feature: ECF payment calculation engine
       And the monthly service fee should be £27,448
       And the variable payment per-participant should be £597
       And the variable payment schedule should be as above
-
-#  Scenario: Calculation of service fees
-#    Given the recruitment target is 2000
-#      And Band A per-participant price is £1,350
-#    When I run the calculation
-#    Then The per-participant service fee should be £540
-#      And The total service fee should be £1,080,000
-#      And The monthly service fee should be £37,241
