@@ -1,7 +1,6 @@
 @ecf
 Feature: ECF payment calculation engine
 
-  # These numbers are from the example "Call Off Pricing Schedule" .xlsm example files supplied to the team
   Scenario: Calculation of variable fees
     Given the recruitment target is 2000
       And Band A per-participant price is £995
