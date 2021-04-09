@@ -28,20 +28,20 @@ private
     band_a * 0.6
   end
 
-  def per_participant_fee(type)
-    per_participant_variable_payment * (type.match(/Start|Completion/) ? 0.2 : 0.15)
+  def per_participant_fee(payment_type)
+    per_participant_variable_payment * (payment_type.match(/Start|Completion/) ? 0.2 : 0.15)
   end
 
-  def fee(type, retained)
-    per_participant_variable_payment * retained
+  def fee(payment_type, retained_participants)
+    per_participant_fee(payment_type) * retained_participants
   end
 
   def retention_payment_schedule
-    @config.dig(:retained_participants).each_with_object({}) do |(key, value), result|
-      result[key] = {
-        retained: value,
-        per_participant: per_participant_fee(key),
-        fee: fee(key, value),
+    @config.dig(:retained_participants).each_with_object({}) do |(payment_type, retained_participants), result|
+      result[payment_type] = {
+        retained: retained_participants,
+        per_participant: per_participant_fee(payment_type),
+        fee: fee(payment_type, retained_participants),
       }
     end
   end

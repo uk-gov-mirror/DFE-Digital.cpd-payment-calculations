@@ -27,7 +27,6 @@ module EcfCalculationSteps
       retained_participants: @retention_table.reduce({}) { |res, hash| res.merge({ hash[:payment_type] => hash[:retained_participants] }) },
     }
     calculator = EcfPaymentCalculationService.new(config)
-    puts "* config -> #{config}"
     @result = calculator.calculate
   end
 
