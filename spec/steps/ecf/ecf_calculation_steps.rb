@@ -62,12 +62,12 @@ module EcfCalculationSteps
   step "The retention payment schedule should be:" do |table|
     aggregate_failures "variable fees" do
       table.hashes.each_with_index do |row, i|
-        expected_per_teacher_variable_fee = CurrencyParser.currency_to_big_decimal(row["Expected Per-Participant Variable Fee"])
-        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i), expected_per_teacher_variable_fee, "Per teacher variable")
+        expected_per_participant = CurrencyParser.currency_to_big_decimal(row["Expected Per-Participant Variable Fee"])
+        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i), expected_per_participant, "Per teacher variable")
 
-        participants = row["Retained Participants"].to_i
+        retained_participants = row["Retained Participants"].to_i
         expected_variable_fee = CurrencyParser.currency_to_big_decimal(row["Expected Variable Fee"])
-        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i) * participants, expected_variable_fee, "Variable fee")
+        expect_with_context(@result.dig(:output, :variable_fees, :retention_payment_schedule, i) * retained_participants, expected_variable_fee, "Variable fee")
       end
     end
   end
