@@ -16,11 +16,7 @@ class EcfPaymentCalculationService
         },
         variable_fees: {
           per_participant_payment: per_participant_variable_payment,
-          starting_per_participant_payment: starting_per_participant_fee,
-          starting_payment: starting_payment("Start"),
-          retention_payment_schedule: (1..4).map { |i| retention_payment("Retention #{i}") },
-          completion_per_participant_payment: completion_payment_per_participant,
-          completion_payment: completion_payment("Completion"),
+          retention_payment_schedule: retention_payment_schedule
         },
       },
     }
@@ -32,28 +28,22 @@ private
     band_a * 0.6
   end
 
-  def starting_per_participant_fee
-    per_participant_variable_payment * 0.2
+  def per_participant_fee(type)
+    per_participant_variable_payment * (type.match(/Start|Completion/) ? 0.2 : 0.15)
   end
 
-  def starting_payment(payment_type)
-    starting_per_participant_fee * retained_participants(payment_type)
+  def fee(type, retained)
+    per_participant_variable_payment * retained
   end
 
-  def completion_payment(payment_type)
-    completion_payment_per_participant * retained_participants(payment_type)
-  end
-
-  def completion_payment_per_participant
-    (per_participant_variable_payment * 0.2)
-  end
-
-  def retention_payment(_payment_type)
-    (per_participant_variable_payment * 0.15)
-  end
-
-  def retained_participants(payment_type)
-    @config.dig(:retained_participants, payment_type)
+  def retention_payment_schedule
+    @config.dig(:retained_participants).each_with_object({}) do |(key, value), result|
+      result[key] = {
+        retained: value,
+        per_participant: per_participant_fee(key),
+        fee: fee(key, value)
+      }
+    end
   end
 
   def per_participant_service_fee

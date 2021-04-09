@@ -27,6 +27,7 @@ module EcfCalculationSteps
       retained_participants: @retention_table.reduce({}) { |res, hash| res.merge({ hash[:payment_type] => hash[:retained_participants] }) },
     }
     calculator = EcfPaymentCalculationService.new(config)
+    puts "* config -> #{config}"
     @result = calculator.calculate
   end
 
@@ -47,17 +48,16 @@ module EcfCalculationSteps
   end
 
   step "the variable payment schedule should be as above" do
+    puts "* result -> #{@result}"
     aggregate_failures "variable fees" do
-      start_expectations = @retention_table.detect { |r| r[:payment_type] == "Start" }
-      expect(@result.dig(:output, :variable_fees, :starting_per_participant_payment)).to eq(start_expectations[:expected_per_participant_variable_fee])
-      expect(@result.dig(:output, :variable_fees, :starting_payment)).to eq(start_expectations[:expected_variable_fee])
 
-      retention_expectations = @retention_table.select { |r| r[:payment_type].match(/Retention/) }
-      # TODO: retention points
+      expect(@result.dig(:output, :variable_fees, :retention_payment_schedule).keys.size).to eq(@retention_table.key.size)
 
-      completion_expectations = @retention_table.detect { |r| r[:payment_type] == "Completion" }
-      expect(@result.dig(:output, :variable_fees, :completion_per_participant_payment)).to eq(completion_expectations[:expected_per_participant_variable_fee])
-      expect(@result.dig(:output, :variable_fees, :completion_payment)).to eq(completion_expectations[:expected_variable_fee])
+      @retention_table.each do |payment_type, value|
+        expected_value = retention_expectations.detect{}
+        expect(@result.dig(:output, :variable_fees, :retention_payment_schedule)).to eq()
+      end
+
     end
   end
 
