@@ -1,7 +1,20 @@
 # frozen_string_literal: true
 
 describe EcfPaymentCalculationService do
-  let(:config) { { recruitment_target: 2000, band_a: 995 } }
+  let(:config) do
+    {
+      recruitment_target: 2000,
+      band_a: 995,
+      retained_participants: {
+        "Start" => 1900,
+        "Retention 1" => 1700,
+        "Retention 2" => 1500,
+        "Retention 3" => 1000,
+        "Retention 4" => 800,
+        "Completion" => 500,
+      },
+    }
+  end
   let(:result) { EcfPaymentCalculationService.new(config).calculate }
 
   it "returns BigDecimal for all money outputs" do
