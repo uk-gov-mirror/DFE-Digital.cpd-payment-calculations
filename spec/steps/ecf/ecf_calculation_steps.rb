@@ -31,15 +31,15 @@ module EcfCalculationSteps
   end
 
   step "the per-participant service fee should be £:decimal_placeholder" do |expected_value|
-    expect(@result.dig(:output, :service_fees, :per_participant_service_fee)).to eq(expected_value)
+    expect(@result.dig(:output, :service_fees, :service_fee_per_participant)).to eq(expected_value)
   end
 
   step "the total service fee should be £:decimal_placeholder" do |expected_value|
-    expect(@result.dig(:output, :service_fees, :total_service_fee)).to eq(expected_value)
+    expect(@result.dig(:output, :service_fees, :service_fee_total)).to eq(expected_value)
   end
 
   step "the monthly service fee should be £:decimal_placeholder" do |expected_value|
-    expect(@result.dig(:output, :service_fees, :monthly_service_fee)).to eq(expected_value)
+    expect(@result.dig(:output, :service_fees, :service_fee_monthly)).to eq(expected_value)
   end
 
   step "the variable payment per-participant should be £:decimal_placeholder" do |expected_value|
@@ -48,7 +48,7 @@ module EcfCalculationSteps
 
   step "the variable payment schedule should be as above" do
     aggregate_failures "variable fees" do
-      actual_schedule = @result.dig(:output, :variable_payments, :retention_payment_schedule)
+      actual_schedule = @result.dig(:output, :variable_payments, :variable_payment_schedule)
       expect(actual_schedule.length).to eq(@retention_table.length)
       @retention_table.each do |expectation|
         actual_values = actual_schedule[expectation[:payment_type]]
