@@ -41,8 +41,8 @@ private
   end
 
   def service_fee_monthly
-    number_of_monthly_payments = 29
-    (service_fee_total / number_of_monthly_payments).round(0).to_d
+    number_of_service_fee_payments = 29
+    (service_fee_total / number_of_service_fee_payments).round(0).to_d
   end
 
   def variable_payment_per_participant

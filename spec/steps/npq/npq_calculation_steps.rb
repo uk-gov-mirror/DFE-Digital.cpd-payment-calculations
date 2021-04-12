@@ -10,7 +10,7 @@ module NpqCalculationSteps
   end
 
   step "there are :value monthly service fee payments" do |value|
-    @number_of_monthly_payments = value.to_i
+    @number_of_service_fee_payments = value.to_i
   end
 
   step "the service fee payment schedule should be:" do |table|
@@ -52,7 +52,7 @@ module NpqCalculationSteps
 
     config = {
       recruitment_target: @recruitment_target,
-      number_of_service_fee_payments: @number_of_monthly_payments,
+      number_of_service_fee_payments: @number_of_service_fee_payments,
       per_participant_price: @price_per_participant,
       retention_points: retention_points,
     }
