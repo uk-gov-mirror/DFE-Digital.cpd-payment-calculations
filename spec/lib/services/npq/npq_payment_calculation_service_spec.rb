@@ -38,7 +38,7 @@ describe NpqPaymentCalculationService do
     end
   end
 
-  describe "#variable_fee_schedule" do
+  describe "#variable_payment_schedule" do
     let(:result) { NpqPaymentCalculationService.new(config).calculate }
 
     it "includes config in the output" do
@@ -46,9 +46,9 @@ describe NpqPaymentCalculationService do
     end
 
     it "returns BigDecimal for all money outputs" do
-      result.dig(:output, :variable_fees).each do |_key, value|
+      result.dig(:output, :variable_payments).each do |_key, value|
         expect(value[:per_participant]).to be_a(BigDecimal)
-        expect(value[:total_variable_fee]).to be_a(BigDecimal)
+        expect(value[:total_variable_payment]).to be_a(BigDecimal)
       end
     end
   end

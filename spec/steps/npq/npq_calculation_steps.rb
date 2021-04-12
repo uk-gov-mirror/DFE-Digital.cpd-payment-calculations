@@ -64,11 +64,11 @@ module NpqCalculationSteps
     aggregate_failures "variable payments" do
       @retention_table.each do |retention_point, values|
         expect_with_context(
-          result.dig(:output, :variable_fees, retention_point, :per_participant), values[:expected_per_participant_variable_payment], "Payment for retention point '#{retention_point}'"
+          result.dig(:output, :variable_payments, retention_point, :per_participant), values[:expected_per_participant_variable_payment], "Payment for retention point '#{retention_point}'"
         )
 
         expect_with_context(
-          result.dig(:output, :variable_fees, retention_point, :total_variable_fee), values[:expected_variable_payment_subtotal], "Total variable payment '#{retention_point}'"
+          result.dig(:output, :variable_payments, retention_point, :total_variable_payment), values[:expected_variable_payment_subtotal], "Total variable payment '#{retention_point}'"
         )
       end
     end

@@ -16,11 +16,11 @@ class NpqPaymentCalculationService
         service_fees: {
           payment_schedule: service_fee_payment_schedule,
         },
-        variable_fees:
+        variable_payments:
           retention_points&.transform_values do |values|
             {
-              per_participant: per_participant_variable_fee,
-              total_variable_fee: total_variable_fee(values[:retained_participants]),
+              per_participant: per_participant_variable_payment,
+              total_variable_payment: total_variable_payment(values[:retained_participants]),
             }
           end,
       },
@@ -57,11 +57,11 @@ private
     (total_service_fee / number_of_service_fee_payments.to_d).round(2)
   end
 
-  def per_participant_variable_fee
+  def per_participant_variable_payment
     (per_participant_price * 0.6 * variable_payment_split).round(2)
   end
 
-  def total_variable_fee(retained_participants)
-    (per_participant_variable_fee * retained_participants).round(2)
+  def total_variable_payment(retained_participants)
+    (per_participant_variable_payment * retained_participants).round(2)
   end
 end

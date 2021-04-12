@@ -15,7 +15,7 @@ module EcfCalculationSteps
         payment_type: values["Payment Type"],
         retained_participants: values["Retained Participants"].to_i,
         expected_per_participant_variable_payment: CurrencyParser.currency_to_big_decimal(values["Expected Per-Participant Variable Payment"]),
-        expected_variable_fee_subtotal: CurrencyParser.currency_to_big_decimal(values["Expected Variable Payment Subtotal"]),
+        expected_variable_payment_subtotal: CurrencyParser.currency_to_big_decimal(values["Expected Variable Payment Subtotal"]),
       }
     end
   end
@@ -54,7 +54,7 @@ module EcfCalculationSteps
         actual_values = actual_schedule[expectation[:payment_type]]
         expect_with_context(actual_values[:retained_participants], expectation[:retained_participants], "#{expectation[:payment_type]} retention numbers passthrough")
         expect_with_context(actual_values[:per_participant], expectation[:expected_per_participant_variable_payment], "#{expectation[:payment_type]} per participant payment")
-        expect_with_context(actual_values[:subtotal], expectation[:expected_variable_fee_subtotal], "#{expectation[:payment_type]} variable payment")
+        expect_with_context(actual_values[:subtotal], expectation[:expected_variable_payment_subtotal], "#{expectation[:payment_type]} variable payment")
       end
     end
   end
