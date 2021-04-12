@@ -2,7 +2,7 @@
 Feature: NPQ single-qualification payment schedule calculation
 
   Scenario: Calculation of payment schedules with one retention point
-    Given there's an qualification with a per-participant price of £555
+    Given there's a qualification with a per-participant price of £555
       And there are 19 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:
@@ -35,7 +35,7 @@ Feature: NPQ single-qualification payment schedule calculation
       And the service fee total should be £221,999.99
 
   Scenario: Calculation of payment schedules with two retention points
-    Given there's an qualification with a per-participant price of £823
+    Given there's a qualification with a per-participant price of £823
       And there are 19 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:

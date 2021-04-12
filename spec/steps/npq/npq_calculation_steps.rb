@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module NpqCalculationSteps
-  step "there's an qualification with a per-participant price of £:decimal_placeholder" do |value|
+  step "there's a qualification with a per-participant price of £:decimal_placeholder" do |value|
     @price_per_participant = value
   end
 
