@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module NpqCalculationSteps
-  step "there's an qualification with a price-per-participant of £:decimal_placeholder" do |value|
+  step "there's an qualification with a per-participant price of £:decimal_placeholder" do |value|
     @price_per_participant = value
   end
 
@@ -18,7 +18,7 @@ module NpqCalculationSteps
     aggregate_failures "service fees" do
       table.hashes.each do |row|
         month = row["Month"].to_i
-        expected_service_fee_total = CurrencyParser.currency_to_big_decimal(row["Service fee total"])
+        expected_service_fee_total = CurrencyParser.currency_to_big_decimal(row["Service Fee"])
         expect_with_context(result.dig(:output, :service_fees, :payment_schedule, month), expected_service_fee_total, "Payment for month '#{month}'")
       end
     end
@@ -35,8 +35,8 @@ module NpqCalculationSteps
     table.hashes.each do |row|
       @retention_table[row["Payment Type"]] = {
         retained_participants: row["Retained Participants"].to_i,
-        expected_per_teacher_variable_fee: CurrencyParser.currency_to_big_decimal(row["Expected Per-Teacher Variable Fee"]),
-        expected_variable_fee: CurrencyParser.currency_to_big_decimal(row["Expected Variable Fee"]),
+        expected_per_participant_variable_payment: CurrencyParser.currency_to_big_decimal(row["Expected Per-Participant Variable Payment"]),
+        expected_variable_payment_subtotal: CurrencyParser.currency_to_big_decimal(row["Expected Variable Payment Subtotal"]),
       }
     end
   end
@@ -52,23 +52,23 @@ module NpqCalculationSteps
 
     config = {
       recruitment_target: @recruitment_target,
-      number_of_monthly_payments: @number_of_monthly_payments,
-      price_per_participant: @price_per_participant,
+      number_of_service_fee_payments: @number_of_monthly_payments,
+      per_participant_price: @price_per_participant,
       retention_points: retention_points,
     }
     NpqPaymentCalculationService.new(config).calculate
   end
 
-  step "expected variable fees should be as above" do
+  step "expected variable payments should be as above" do
     result = calculate
-    aggregate_failures "variable fees" do
+    aggregate_failures "variable payments" do
       @retention_table.each do |retention_point, values|
         expect_with_context(
-          result.dig(:output, :variable_fees, retention_point, :per_teacher_variable_fee), values[:expected_per_teacher_variable_fee], "Payment for retention point '#{retention_point}'"
+          result.dig(:output, :variable_fees, retention_point, :per_participant), values[:expected_per_participant_variable_payment], "Payment for retention point '#{retention_point}'"
         )
 
         expect_with_context(
-          result.dig(:output, :variable_fees, retention_point, :total_variable_fee), values[:expected_variable_fee], "Total variable fee '#{retention_point}'"
+          result.dig(:output, :variable_fees, retention_point, :total_variable_fee), values[:expected_variable_payment_subtotal], "Total variable payment '#{retention_point}'"
         )
       end
     end
