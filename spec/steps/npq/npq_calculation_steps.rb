@@ -16,11 +16,16 @@ module NpqCalculationSteps
   step "the service fee payment schedule should be:" do |table|
     result = calculate
     aggregate_failures "service fees" do
+      total_payment = 0
       table.hashes.each do |row|
         month = row["Month"].to_i
         expected_service_fee_total = CurrencyParser.currency_to_big_decimal(row["Service Fee"])
+        total_payment += expected_service_fee_total
         expect_with_context(result.dig(:output, :service_fees, :payment_schedule, month), expected_service_fee_total, "Payment for month '#{month}'")
       end
+
+      expect_with_context(@number_of_service_fee_payments, table.hashes.count, "Number of schedule payments")
+      expect_with_context(total_payment, result.dig(:output, :service_fees, :payment_schedule).values.sum, "Total schedule payment")
     end
   end
 
