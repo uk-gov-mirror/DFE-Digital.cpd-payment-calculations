@@ -2,6 +2,7 @@ module Services
   module Core
     class PaymentCalculation
       private
+
       attr_accessor :config
 
       # @param [Hash] config

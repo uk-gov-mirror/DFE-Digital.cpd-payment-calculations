@@ -21,6 +21,7 @@ module Services
       end
 
       private
+
       def per_participant_service_fee
         band_a * 0.4
       end
