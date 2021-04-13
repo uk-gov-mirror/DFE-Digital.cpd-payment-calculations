@@ -26,14 +26,6 @@ module Services
         band_a * 0.4
       end
 
-      def total_service_fee
-        recruitment_target * per_participant_service_fee
-      end
-
-      def monthly_service_fee
-        (total_service_fee / number_of_monthly_payments).round(0).to_d
-      end
-
       def number_of_monthly_payments
         29
       end

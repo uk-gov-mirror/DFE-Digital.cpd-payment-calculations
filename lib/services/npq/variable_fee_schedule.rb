@@ -5,12 +5,7 @@ module Services
         {
           input: config,
           output: {
-            variable_fee_schedule: retention_points.transform_values do |values|
-              {
-                per_teacher_variable_fee: per_teacher_variable_fee,
-                total_variable_fee: total_variable_fee(values[:retained_participants]),
-              }
-            end,
+            variable_fee_schedule: variable_fee_schedule
           },
         }
       end
@@ -31,6 +26,15 @@ module Services
 
       def payment_split
         1.0 / retention_points.length
+      end
+
+      def variable_fee_schedule
+        retention_points.transform_values do |values|
+          {
+            per_teacher_variable_fee: per_teacher_variable_fee,
+            total_variable_fee: total_variable_fee(values[:retained_participants]),
+          }
+        end
       end
 
     end
