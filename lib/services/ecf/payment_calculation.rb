@@ -5,7 +5,7 @@ module Services
     class PaymentCalculation < Services::Core::PaymentCalculation
       class << self
         def call(config)
-          self.new(config).call()
+          self.new(config).()
         end
       end
 

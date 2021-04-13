@@ -31,7 +31,7 @@ describe Services::Npq::ServiceFeeSchedule do
     end
 
     it "returns BigDecimal for all money outputs" do
-      result.dig(:output, :service_fee_payment_schedule).each do |_key, value|
+      result.dig(:output, :service_fee_payment_schedule).each do |value|
         expect(value).to be_a(BigDecimal)
       end
     end
