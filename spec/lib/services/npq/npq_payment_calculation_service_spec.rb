@@ -4,9 +4,10 @@ describe NpqPaymentCalculationService do
   let(:config) do
     {
       recruitment_target: 2000,
-      price_per_participant: BigDecimal(456.78, 10),
-      number_of_monthly_payments: 19,
-      retention_points: {
+      per_participant_price: BigDecimal(456.78, 10),
+      number_of_service_fee_payments: 19,
+      retention_points:
+      {
         "Commencement": {
           retained_participants: 100,
         },
@@ -24,30 +25,30 @@ describe NpqPaymentCalculationService do
   end
 
   describe "#service_fee_schedule" do
-    let(:result) { NpqPaymentCalculationService.new(config).service_fee_schedule }
+    let(:result) { NpqPaymentCalculationService.new(config).calculate }
 
     it "includes config in the output" do
       expect(result[:input]).to eq(config)
     end
 
     it "returns BigDecimal for all money outputs" do
-      result.dig(:output, :service_fee_payment_schedule).each do |_key, value|
+      result.dig(:output, :service_fees, :payment_schedule).each do |_key, value|
         expect(value).to be_a(BigDecimal)
       end
     end
   end
 
-  describe "#variable_fee_schedule" do
-    let(:result) { NpqPaymentCalculationService.new(config).variable_fee_schedule }
+  describe "#variable_payment_schedule" do
+    let(:result) { NpqPaymentCalculationService.new(config).calculate }
 
     it "includes config in the output" do
       expect(result[:input]).to eq(config)
     end
 
     it "returns BigDecimal for all money outputs" do
-      result.dig(:output, :variable_fee_schedule).each do |_key, value|
-        expect(value[:per_teacher_variable_fee]).to be_a(BigDecimal)
-        expect(value[:total_variable_fee]).to be_a(BigDecimal)
+      result.dig(:output, :variable_payments).each do |_key, value|
+        expect(value[:per_participant]).to be_a(BigDecimal)
+        expect(value[:total_variable_payment]).to be_a(BigDecimal)
       end
     end
   end

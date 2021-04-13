@@ -1,19 +1,34 @@
 # frozen_string_literal: true
 
 describe EcfPaymentCalculationService do
-  before do
-    @config = { recruitment_target: 2000, band_a: 995, band_b: 979, band_c: 966, setup_cost: 123.456 }
-    calculator = EcfPaymentCalculationService.new(@config)
-    @result = calculator.calculate
+  let(:config) do
+    {
+      recruitment_target: 2000,
+      band_a: BigDecimal(995, 10),
+      retained_participants: {
+        "Start" => 1900,
+        "Retention 1" => 1700,
+        "Retention 2" => 1500,
+        "Retention 3" => 1000,
+        "Retention 4" => 800,
+        "Completion" => 500,
+      },
+    }
   end
+  let(:result) { EcfPaymentCalculationService.new(config).calculate }
 
   it "returns BigDecimal for all money outputs" do
-    expect(@result[:output][:per_participant_service_fee]).to be_a(BigDecimal)
-    expect(@result[:output][:total_service_fee]).to be_a(BigDecimal)
-    expect(@result[:output][:monthly_service_fee]).to be_a(BigDecimal)
+    expect(result.dig(:output, :service_fees, :service_fee_per_participant)).to be_a(BigDecimal)
+    expect(result.dig(:output, :service_fees, :service_fee_total)).to be_a(BigDecimal)
+    expect(result.dig(:output, :service_fees, :service_fee_monthly)).to be_a(BigDecimal)
+    expect(result.dig(:output, :variable_payments, :per_participant)).to be_a(BigDecimal)
+    result.dig(:output, :variable_payments, :variable_payment_schedule).each do |_key, value|
+      expect(value[:per_participant]).to be_a(BigDecimal)
+      expect(value[:subtotal]).to be_a(BigDecimal)
+    end
   end
 
   it "includes config in the output" do
-    expect(@result[:input]).to eq(@config)
+    expect(result[:input]).to eq(config)
   end
 end

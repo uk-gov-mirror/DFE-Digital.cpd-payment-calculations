@@ -18,3 +18,16 @@ The definitions of the calculations and the example calculations being tested ca
 ## Development
 
 Support for Gherkin syntax rspec tests is provided [turnip](https://github.com/jnicklas/turnip). 
+
+### Naming
+
+Here are the names we are using in the code and specs for the different concepts involved in the calculations by way of an example:
+
+> Per participant price £995 >>
+per participant service fee £398 (40%) >> monthly service fee £27k >> total service fee £796k
+>
+> Per participant price £995 >> per participant variable payment £597 (60%) >> per participant variable payment for a retention period £119 (20% of 60%) >> variable payment subtotal for a retention period with 1900 retained participants £226k
+
+* "Participants" includes both teachers and mentors.
+* Note that the contractual term for "variable payment" is actually "output payment", however we're avoiding this in the code to avoid the inevitable confusion with program input/output terminology. These are payments made based on the performance of the training provider (i.e. their output).
+* "Payment type" for start/retention/completion variable payments.
