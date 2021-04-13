@@ -36,3 +36,24 @@ Feature: ECF payment calculation engine
       And the monthly service fee should be £37,241
       And the variable payment per-participant should be £810
       And the variable payment schedule should be as above
+
+  Scenario: Calculation of payments falling into Band B
+    Given the recruitment target is 4,000
+      And Band A per-participant price is £995
+      And Band B per-participant price is £979
+      And there are the following retention numbers:
+        | Payment Type | Month    | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
+        | Start        | Jan 2021 | 1900                  | £119.40                                   | £226,860                           |
+        | Retention 1  | Jun 2021 | 1700                  | £89.55                                    | £152,235                           |
+        | Retention 2  | Feb 2022 | 1500                  | £89.55                                    | £134,325                           |
+        | Retention 3  | Jul 2022 | 1000                  | £89.55                                    | £89,550                            |
+        | Retention 4  | Mar 2023 | 800                   | £89.55                                    | £71,640                            |
+        | Completion   | Aug 2023 | 500                   | £119.40                                   | £59,700                            |
+    When I run the calculation
+    Then the per-participant service fee for Band A should be £398
+      And the per-participant service fee for Band B should be £392
+      And the total service fee should be £796,000
+      And the monthly service fee should be £27,448
+      And the variable payment per-participant should be £597
+      And the variable payment schedule should be as above
+
