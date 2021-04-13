@@ -40,7 +40,7 @@ module Services
       # config accessors
 
       def band_a
-        BigDecimal(@config[:band_a], 10)
+        BigDecimal(config[:band_a], 10)
       end
     end
   end

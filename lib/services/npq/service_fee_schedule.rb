@@ -1,5 +1,7 @@
+require_relative 'payment_calculation'
+
 module Services
-  module NPQ
+  module Npq
     class ServiceFeeSchedule < PaymentCalculation
       def call
         {

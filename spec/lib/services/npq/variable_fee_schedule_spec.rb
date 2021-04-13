@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe NpqPaymentCalculationService do
+describe Services::Npq::VariableFeeSchedule do
   let(:config) do
     {
       recruitment_target: 2000,
@@ -23,22 +23,8 @@ describe NpqPaymentCalculationService do
     }
   end
 
-  describe "#service_fee_schedule" do
-    let(:result) { NpqPaymentCalculationService.new(config).service_fee_schedule }
-
-    it "includes config in the output" do
-      expect(result[:input]).to eq(config)
-    end
-
-    it "returns BigDecimal for all money outputs" do
-      result.dig(:output, :service_fee_payment_schedule).each do |_key, value|
-        expect(value).to be_a(BigDecimal)
-      end
-    end
-  end
-
   describe "#variable_fee_schedule" do
-    let(:result) { NpqPaymentCalculationService.new(config).variable_fee_schedule }
+    let(:result) { Services::Npq::VariableFeeSchedule.call(config) }
 
     it "includes config in the output" do
       expect(result[:input]).to eq(config)

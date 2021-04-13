@@ -2,7 +2,7 @@ module Services
   module Core
     class PaymentCalculation
       private
-      attr_reader :config
+      attr_accessor :config
 
       # @param [Hash] config
       def initialize(config)

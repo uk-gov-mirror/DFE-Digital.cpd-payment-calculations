@@ -1,7 +1,7 @@
 module Services
-  module NPQ
-    class ServiceFeeSchedule < PaymentCalculation
-      def variable_fee_schedule
+  module Npq
+    class VariableFeeSchedule < PaymentCalculation
+      def call
         {
           input: config,
           output: {
