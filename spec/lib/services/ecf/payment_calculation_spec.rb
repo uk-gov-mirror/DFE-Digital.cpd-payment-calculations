@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-describe EcfPaymentCalculationService do
+describe Services::Ecf::PaymentCalculation do
   before do
     @config = { recruitment_target: 2000, band_a: 995, band_b: 979, band_c: 966, setup_cost: 123.456 }
-    calculator = EcfPaymentCalculationService.new(@config)
-    @result = calculator.calculate
+    @result = Services::EcfPaymentCalculation.call(@config)
   end
 
   it "returns BigDecimal for all money outputs" do
