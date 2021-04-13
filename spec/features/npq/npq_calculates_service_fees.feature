@@ -1,69 +1,103 @@
 @npq
 Feature: NPQ single-qualification payment schedule calculation
 
-  Scenario: Calculation of payment schedules with one retention point
-    Given there's a qualification with a per-participant price of £555
+  Scenario: Calculation of NPQLTD payment schedules with one retention point
+    Given there's a qualification with a per-participant price of £902
       And there are 19 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:
         | Payment Type | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
-        | Commencement | 1000                  | £111                                      | £111,000.00                    |
-        | Retention 1  | 700                   | £111                                      | £77,700.00                     |
-        | Completion   | 300                   | £111                                      | £33,300.00                     |
+        | Commencement | 1000                  | £180.40                                   | £180,400.00                        |
+        | Retention 1  | 700                   | £180.40                                   | £126,280.00                        |
+        | Completion   | 300                   | £180.40                                   | £54,120.00                         |
     Then expected variable payments should be as above
       And the service fee payment schedule should be:
         | Month | Service Fee |
-        | 1     | £11,684.21  |
-        | 2     | £11,684.21  |
-        | 3     | £11,684.21  |
-        | 4     | £11,684.21  |
-        | 5     | £11,684.21  |
-        | 6     | £11,684.21  |
-        | 7     | £11,684.21  |
-        | 8     | £11,684.21  |
-        | 9     | £11,684.21  |
-        | 10    | £11,684.21  |
-        | 11    | £11,684.21  |
-        | 12    | £11,684.21  |
-        | 13    | £11,684.21  |
-        | 14    | £11,684.21  |
-        | 15    | £11,684.21  |
-        | 16    | £11,684.21  |
-        | 17    | £11,684.21  |
-        | 18    | £11,684.21  |
-        | 19    | £11,684.21  |
-      And the service fee total should be £221,999.99
+        | 1     | £18,989.47  |
+        | 2     | £18,989.47  |
+        | 3     | £18,989.47  |
+        | 4     | £18,989.47  |
+        | 5     | £18,989.47  |
+        | 6     | £18,989.47  |
+        | 7     | £18,989.47  |
+        | 8     | £18,989.47  |
+        | 9     | £18,989.47  |
+        | 10    | £18,989.47  |
+        | 11    | £18,989.47  |
+        | 12    | £18,989.47  |
+        | 13    | £18,989.47  |
+        | 14    | £18,989.47  |
+        | 15    | £18,989.47  |
+        | 16    | £18,989.47  |
+        | 17    | £18,989.47  |
+        | 18    | £18,989.47  |
+        | 19    | £18,989.47  |
+      And the service fee total should be £360,799.93
 
-  Scenario: Calculation of payment schedules with two retention points
-    Given there's a qualification with a per-participant price of £823
-      And there are 19 monthly service fee payments
+  Scenario: Calculation of NPQSL payment schedules with two retention points
+    Given there's a qualification with a per-participant price of £1149
+      And there are 25 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:
         | Payment Type | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
-        | Commencement | 900                   | £123.45                                   | £111,105.00                    |
-        | Retention 1  | 700                   | £123.45                                   | £86,415.00                     |
-        | Retention 2  | 650                   | £123.45                                   | £80,242.50                     |
-        | Completion   | 432                   | £123.45                                   | £53,330.40                     |
+        | Commencement | 900                   | £172.35                                   | £155,115.00                        |
+        | Retention 1  | 700                   | £172.35                                   | £120,645.00                        |
+        | Retention 2  | 650                   | £172.35                                   | £112,027.50                        |
+        | Completion   | 432                   | £172.35                                   | £74,455.20                         |
     Then expected variable payments should be as above
       And the service fee payment schedule should be:
         | Month | Service Fee |
-        | 1     | £17,326.32  |
-        | 2     | £17,326.32  |
-        | 3     | £17,326.32  |
-        | 4     | £17,326.32  |
-        | 5     | £17,326.32  |
-        | 6     | £17,326.32  |
-        | 7     | £17,326.32  |
-        | 8     | £17,326.32  |
-        | 9     | £17,326.32  |
-        | 10    | £17,326.32  |
-        | 11    | £17,326.32  |
-        | 12    | £17,326.32  |
-        | 13    | £17,326.32  |
-        | 14    | £17,326.32  |
-        | 15    | £17,326.32  |
-        | 16    | £17,326.32  |
-        | 17    | £17,326.32  |
-        | 18    | £17,326.32  |
-        | 19    | £17,326.32  |
-      And the service fee total should be £329,200.08
+        | 1     | £18,384.00  |
+        | 2     | £18,384.00  |
+        | 3     | £18,384.00  |
+        | 4     | £18,384.00  |
+        | 5     | £18,384.00  |
+        | 6     | £18,384.00  |
+        | 7     | £18,384.00  |
+        | 8     | £18,384.00  |
+        | 9     | £18,384.00  |
+        | 10    | £18,384.00  |
+        | 11    | £18,384.00  |
+        | 12    | £18,384.00  |
+        | 13    | £18,384.00  |
+        | 14    | £18,384.00  |
+        | 15    | £18,384.00  |
+        | 16    | £18,384.00  |
+        | 17    | £18,384.00  |
+        | 18    | £18,384.00  |
+        | 19    | £18,384.00  |
+      And the service fee total should be £459,600.00
+
+  Scenario: Calculation of NPQLH payment schedules with two retention points
+    Given there's a qualification with a per-participant price of £1985
+      And there are 31 monthly service fee payments
+      And the recruitment target is 1000
+      And there are the following retention points:
+        | Payment Type | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
+        | Commencement | 900                   | £297.75                                   | £267,975.00                        |
+        | Retention 1  | 700                   | £297.75                                   | £208,425.00                        |
+        | Retention 2  | 650                   | £297.75                                   | £193,537.50                        |
+        | Completion   | 432                   | £297.75                                   | £128,628.00                        |
+    Then expected variable payments should be as above
+      And the service fee payment schedule should be:
+        | Month | Service Fee |
+        | 1     | £25,612.90  |
+        | 2     | £25,612.90  |
+        | 3     | £25,612.90  |
+        | 4     | £25,612.90  |
+        | 5     | £25,612.90  |
+        | 6     | £25,612.90  |
+        | 7     | £25,612.90  |
+        | 8     | £25,612.90  |
+        | 9     | £25,612.90  |
+        | 10    | £25,612.90  |
+        | 11    | £25,612.90  |
+        | 12    | £25,612.90  |
+        | 13    | £25,612.90  |
+        | 14    | £25,612.90  |
+        | 15    | £25,612.90  |
+        | 16    | £25,612.90  |
+        | 17    | £25,612.90  |
+        | 18    | £25,612.90  |
+        | 19    | £25,612.90  |
+      And the service fee total should be £793,999.90
