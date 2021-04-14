@@ -1,7 +1,7 @@
 @ecf
 Feature: ECF payment calculation engine
 
-  Scenario: Calculation of payments for a single product
+  Scenario: Calculation of payments example 1
     Given the recruitment target is 2000
       And Band A per-participant price is £995
       And there are the following retention numbers:
@@ -19,7 +19,7 @@ Feature: ECF payment calculation engine
       And the variable payment per-participant should be £597
       And the variable payment schedule should be as above
 
-  Scenario: Calculation of payments for a different single product
+  Scenario: Calculation of payments example 2
     Given the recruitment target is 2000
       And Band A per-participant price is £1,350
       And there are the following retention numbers:
