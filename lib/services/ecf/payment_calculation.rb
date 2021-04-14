@@ -5,7 +5,7 @@ module Services
     class PaymentCalculation < Services::Core::PaymentCalculation
       class << self
         def call(config)
-          self.new(config).()
+          new(config).call
         end
       end
 
@@ -20,7 +20,7 @@ module Services
         }
       end
 
-      private
+    private
 
       def per_participant_service_fee
         band_a * 0.4

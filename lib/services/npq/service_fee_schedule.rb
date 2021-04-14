@@ -1,4 +1,6 @@
-require_relative 'payment_calculation'
+# frozen_string_literal: true
+
+require_relative "payment_calculation"
 
 module Services
   module Npq
@@ -10,7 +12,7 @@ module Services
         }
       end
 
-      private
+    private
 
       def service_fee_payment_schedule
         [monthly_service_fee] * number_of_monthly_payments
@@ -23,7 +25,6 @@ module Services
       def number_of_monthly_payments
         config[:number_of_monthly_payments]
       end
-
     end
   end
 end

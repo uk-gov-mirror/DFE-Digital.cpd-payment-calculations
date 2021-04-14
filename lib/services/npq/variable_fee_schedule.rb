@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Services
   module Npq
     class VariableFeeSchedule < PaymentCalculation
@@ -5,12 +7,12 @@ module Services
         {
           input: config,
           output: {
-            variable_fee_schedule: variable_fee_schedule
+            variable_fee_schedule: variable_fee_schedule,
           },
         }
       end
 
-      private
+    private
 
       def retention_points
         config[:retention_points]
@@ -36,7 +38,6 @@ module Services
           }
         end
       end
-
     end
   end
 end
