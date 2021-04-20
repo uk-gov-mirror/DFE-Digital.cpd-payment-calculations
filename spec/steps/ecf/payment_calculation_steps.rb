@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module EcfCalculationSteps
+module PaymentCalculationSteps
   step "the recruitment target is :decimal_placeholder" do |value|
     @recruitment_target = value
   end
@@ -26,8 +26,8 @@ module EcfCalculationSteps
       band_a: @band_a,
       retained_participants: @retention_table.reduce({}) { |res, hash| res.merge({ hash[:payment_type] => hash[:retained_participants] }) },
     }
-    calculator = EcfPaymentCalculationService.new(config)
-    @result = calculator.calculate
+    calculator = Services::Ecf::PaymentCalculation.new(config)
+    @result = calculator.call
   end
 
   step "the per-participant service fee should be £:decimal_placeholder" do |expected_value|
@@ -61,5 +61,5 @@ module EcfCalculationSteps
 end
 
 RSpec.configure do |config|
-  config.include EcfCalculationSteps, ecf: true
+  config.include PaymentCalculationSteps, ecf: true
 end

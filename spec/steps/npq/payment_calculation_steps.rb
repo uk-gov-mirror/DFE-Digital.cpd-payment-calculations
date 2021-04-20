@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module NpqCalculationSteps
+module PaymentCalculationSteps
   step "there's a qualification with a per-participant price of £:decimal_placeholder" do |value|
     @price_per_participant = value
   end
@@ -61,7 +61,7 @@ module NpqCalculationSteps
       per_participant_price: @price_per_participant,
       retention_points: retention_points,
     }
-    NpqPaymentCalculationService.new(config).calculate
+    Services::Npq::PaymentCalculation.call(config)
   end
 
   step "expected variable payments should be as above" do
@@ -81,5 +81,5 @@ module NpqCalculationSteps
 end
 
 RSpec.configure do |config|
-  config.include NpqCalculationSteps, npq: true
+  config.include PaymentCalculationSteps, npq: true
 end
