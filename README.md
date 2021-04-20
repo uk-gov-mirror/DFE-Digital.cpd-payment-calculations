@@ -17,7 +17,7 @@ The definitions of the calculations and the example calculations being tested ca
 
 ## Development
 
-Support for Gherkin syntax rspec tests is provided [turnip](https://github.com/jnicklas/turnip). 
+Support for Gherkin syntax rspec tests is provided by [turnip](https://github.com/jnicklas/turnip). 
 
 ## Architecture Decision Records
 
