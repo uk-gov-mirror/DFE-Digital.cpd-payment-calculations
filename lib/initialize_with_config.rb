@@ -25,12 +25,21 @@ private
   def initialize(config)
     self.config = config.is_a?(Hash) ? OpenStruct.new(config) : config
     config.each do |key, value|
-      meta_def(key) { value }
+      meta_def(key) { value } unless allow_override? && respond_to?(key)
     end
+  end
+
+  def allow_override?
+    !self.class.prevent_override
   end
 
   module InitialiseClassConfig
     include ActiveSupport
+    attr_accessor :prevent_override
+
+    def prevent_local_override
+      self.prevent_override = true
+    end
 
     def call(config)
       new(config).call
