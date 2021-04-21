@@ -30,8 +30,14 @@ module PaymentCalculationSteps
   end
 
   step "the service fee total should be £:decimal_placeholder" do |expected_amount|
+    @expected_service_fee_total = expected_amount
     result = calculate
-    expect(result.dig(:output, :service_fees, :payment_schedule).sum).to eq(expected_amount)
+    expect(result.dig(:output, :service_fees, :total)).to eq(expected_amount)
+  end
+
+  step "the service fee schedule total should be the same as the service fee total" do
+    result = calculate
+    expect(result.dig(:output, :service_fees, :payment_schedule).sum).to eq(@expected_service_fee_total)
   end
 
   step "there are the following retention points:" do |table|
