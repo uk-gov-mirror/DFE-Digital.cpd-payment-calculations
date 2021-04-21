@@ -32,7 +32,7 @@ describe Services::Npq::PaymentCalculation do
     end
 
     it "returns BigDecimal for all money outputs" do
-      result.dig(:output, :service_fees, :payment_schedule).each do |_key, value|
+      result.dig(:output, :service_fees, :payment_schedule).each do |value|
         expect(value).to be_a(BigDecimal)
       end
     end
