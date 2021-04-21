@@ -24,9 +24,9 @@ module Services
       end
 
       def service_fee_payment_schedule
-        schedule = [monthly_service_fee] * number_of_service_fee_payments
-        schedule[0] += total_service_fee - schedule.sum
-        schedule
+        ([monthly_service_fee] * number_of_service_fee_payments).tap do |schedule|
+          schedule[0] += total_service_fee - schedule.sum
+        end
       end
     end
   end
