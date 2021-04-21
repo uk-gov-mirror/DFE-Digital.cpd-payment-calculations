@@ -33,6 +33,7 @@ Feature: NPQ single-qualification payment schedule calculation
         | 18    | £18,989.47  |
         | 19    | £18,989.47  |
       And the service fee total should be £360,800.00
+      And the service fee schedule total should be the same as the service fee total
 
   Scenario: Calculation of NPQSL payment schedules with two retention points
     Given there's a qualification with a per-participant price of £1149
@@ -73,6 +74,7 @@ Feature: NPQ single-qualification payment schedule calculation
         | 24    | £18,384.00  |
         | 25    | £18,384.00  |
       And the service fee total should be £459,600.00
+      And the service fee schedule total should be the same as the service fee total
 
   Scenario: Calculation of NPQLH payment schedules with two retention points
     Given there's a qualification with a per-participant price of £1985
@@ -119,3 +121,4 @@ Feature: NPQ single-qualification payment schedule calculation
         | 30    | £25,612.90  |
         | 31    | £25,612.90  |
       And the service fee total should be £794,000.00
+      And the service fee schedule total should be the same as the service fee total

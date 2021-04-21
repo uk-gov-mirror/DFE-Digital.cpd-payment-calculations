@@ -9,6 +9,7 @@ module Services
       def call
         {
           payment_schedule: service_fee_payment_schedule,
+          total: total_service_fee,
         }
       end
 
