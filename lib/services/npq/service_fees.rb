@@ -23,9 +23,7 @@ module Services
       end
 
       def service_fee_payment_schedule
-        (1..number_of_service_fee_payments).each_with_object({}) do |i, schedule|
-          schedule[i] = monthly_service_fee
-        end
+        [monthly_service_fee] * number_of_service_fee_payments
       end
     end
   end
