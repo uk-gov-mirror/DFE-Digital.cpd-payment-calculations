@@ -17,6 +17,10 @@ There are some similarities and many differences in the inputs, outputs and math
 3. The variable payments are very different in detail.
 4. They have different banding systems.
 
+### People
+
+Tim Abell and Pavel Lisovin (track and pay developers) discussed the issue amongst ourselves and came to this as a decision for the time being.
+
 ## Decision
 
 1. Build two payment engines that do not share code.
