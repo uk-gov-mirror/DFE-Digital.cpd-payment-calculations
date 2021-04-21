@@ -23,7 +23,9 @@ module Services
       end
 
       def service_fee_payment_schedule
-        [monthly_service_fee] * number_of_service_fee_payments
+        schedule = [monthly_service_fee] * number_of_service_fee_payments
+        schedule[0] += total_service_fee - schedule.sum
+        schedule
       end
     end
   end
