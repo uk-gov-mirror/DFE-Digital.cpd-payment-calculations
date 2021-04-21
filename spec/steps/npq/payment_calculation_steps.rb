@@ -46,8 +46,8 @@ module PaymentCalculationSteps
     table.hashes.each do |row|
       @retention_table[row["Payment Type"]] = {
         retained_participants: row["Retained Participants"].to_i,
-        expected_per_participant_variable_payment: CurrencyParser.currency_to_big_decimal(row["Expected Per-Participant Variable Payment"]),
-        expected_variable_payment_subtotal: CurrencyParser.currency_to_big_decimal(row["Expected Variable Payment Subtotal"]),
+        expected_per_participant_variable_payment: CurrencyParser.currency_to_big_decimal(row["Expected Per-Participant Output Payment"]),
+        expected_variable_payment_subtotal: CurrencyParser.currency_to_big_decimal(row["Expected Output Payment Subtotal"]),
       }
     end
   end

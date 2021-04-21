@@ -6,10 +6,10 @@ Feature: NPQ single-qualification payment schedule calculation
       And there are 19 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:
-        | Payment Type | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
-        | Commencement | 1000                  | £180.40                                   | £180,400.00                        |
-        | Retention 1  | 700                   | £180.40                                   | £126,280.00                        |
-        | Completion   | 300                   | £180.40                                   | £54,120.00                         |
+        | Payment Type | Retained Participants | Expected Per-Participant Output Payment | Expected Output Payment Subtotal |
+        | Commencement | 1000                  | £180.40                                 | £180,400.00                      |
+        | Retention 1  | 700                   | £180.40                                 | £126,280.00                      |
+        | Completion   | 300                   | £180.40                                 | £54,120.00                       |
     Then expected variable payments should be as above
       And the service fee payment schedule should be:
         | Month | Service Fee |
@@ -40,11 +40,11 @@ Feature: NPQ single-qualification payment schedule calculation
       And there are 25 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:
-        | Payment Type | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
-        | Commencement | 900                   | £172.35                                   | £155,115.00                        |
-        | Retention 1  | 700                   | £172.35                                   | £120,645.00                        |
-        | Retention 2  | 650                   | £172.35                                   | £112,027.50                        |
-        | Completion   | 432                   | £172.35                                   | £74,455.20                         |
+        | Payment Type | Retained Participants | Expected Per-Participant Output Payment | Expected Output Payment Subtotal |
+        | Commencement | 900                   | £172.35                                 | £155,115.00                      |
+        | Retention 1  | 700                   | £172.35                                 | £120,645.00                      |
+        | Retention 2  | 650                   | £172.35                                 | £112,027.50                      |
+        | Completion   | 432                   | £172.35                                 | £74,455.20                       |
     Then expected variable payments should be as above
       And the service fee payment schedule should be:
         | Month | Service Fee |
@@ -81,11 +81,11 @@ Feature: NPQ single-qualification payment schedule calculation
       And there are 31 monthly service fee payments
       And the recruitment target is 1000
       And there are the following retention points:
-        | Payment Type | Retained Participants | Expected Per-Participant Variable Payment | Expected Variable Payment Subtotal |
-        | Commencement | 900                   | £297.75                                   | £267,975.00                        |
-        | Retention 1  | 700                   | £297.75                                   | £208,425.00                        |
-        | Retention 2  | 650                   | £297.75                                   | £193,537.50                        |
-        | Completion   | 432                   | £297.75                                   | £128,628.00                        |
+        | Payment Type | Retained Participants | Expected Per-Participant Output Payment | Expected Output Payment Subtotal |
+        | Commencement | 900                   | £297.75                                 | £267,975.00                      |
+        | Retention 1  | 700                   | £297.75                                 | £208,425.00                      |
+        | Retention 2  | 650                   | £297.75                                 | £193,537.50                      |
+        | Completion   | 432                   | £297.75                                 | £128,628.00                      |
     Then expected variable payments should be as above
       And the service fee payment schedule should be:
         | Month | Service Fee |
