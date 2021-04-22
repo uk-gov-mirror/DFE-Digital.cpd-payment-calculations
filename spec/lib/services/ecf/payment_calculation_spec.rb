@@ -25,7 +25,7 @@ describe ::Services::Ecf::PaymentCalculation do
     result.dig(:output, :variable_payments, :variable_payment_schedule).each do |_key, value|
       expect(value[:per_participant]).to be_a(BigDecimal)
       expect(value[:subtotal]).to be_a(BigDecimal)
-    end
+    end if result[:output][:variable_payments]
   end
 
   it "includes config in the output" do

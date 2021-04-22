@@ -2,22 +2,15 @@
 
 module Services
   module Ecf
-    class VariablePayments
+    class VariablePaymentsSchedule
       include InitializeWithConfig
-      delegate :band_a, :retained_participants, to: :config
+      delegate :retained_participants, to: :config
 
       def call
-        {
-          per_participant: variable_payment_per_participant,
-          variable_payment_schedule: variable_payment_schedule,
-        }
+        variable_payment_schedule
       end
 
-    private
-
-      def variable_payment_per_participant
-        band_a * 0.6
-      end
+      private
 
       def variable_payment_schedule
         retained_participants.each_with_object({}) do |(payment_type, number_retained), result|
@@ -33,9 +26,14 @@ module Services
         variable_payment_per_participant * (payment_type.match(/Start|Completion/) ? 0.2 : 0.15)
       end
 
-      def variable_payment_subtotal_for(payment_type, retained_participants)
-        variable_payment_per_participant_for(payment_type) * retained_participants
+      def variable_payment_subtotal_for(payment_type, number_retained)
+        variable_payment_per_participant_for(payment_type) * number_retained
       end
+
+      def variable_payment_per_participant
+        VariablePaymentsPerParticipant.call(config)
+      end
+
     end
   end
 end
